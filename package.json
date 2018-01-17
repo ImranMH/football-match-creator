@@ -1,0 +1,40 @@
+{
+  "name": "fifa18win_pridictor",
+  "version": "1.0.0",
+  "description": "fifa 2018 football world cup win predictor application",
+  "main": "server.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server/server.js",
+    "client": "node start-client.js",
+    "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImranMH/fifa18win_pridictor.git"
+  },
+  "keywords": [
+    "fifa",
+    "20018",
+    "football"
+  ],
+  "author": "Imran Hossain <imran096@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ImranMH/fifa18win_pridictor/issues"
+  },
+  "homepage": "https://github.com/ImranMH/fifa18win_pridictor#readme",
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
