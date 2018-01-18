@@ -1,9 +1,9 @@
 
 module.exports = function(mongoose) {
 
-const PlayerSchema = require('../schema/player.schema')(mongoose)
+const OfficialSchema = require('../schema/player.schema')(mongoose)
 
-const PlayerModel = mongoose.model('Player', PlayerSchema);
+const OfficialModel = mongoose.model('official', OfficialSchema);
 
 	let api = {
 	addTeam,

@@ -4,7 +4,7 @@ import './App.css';
 
 class App extends Component {
   handleClick = () => {
-    fetch('/apis/test').then(res => res.json()).then(data=> console.log(data))
+    fetch('/api/team/read').then(res => res.json()).then(data=> console.log(data))
     
     console.log('obj');
   };

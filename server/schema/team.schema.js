@@ -8,6 +8,7 @@ const TeamSchema = new Schema({
     name     : String,
     continent      : String,
     flag      : String,
+    appearence      : Number,
     players      : [{type: Schema.Types.ObjectId, ref: "PlayerModel"}],
     group      : String,
     standing      : Number,
