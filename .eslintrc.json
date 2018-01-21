@@ -1,6 +1,7 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb"],
   "parser": "babel-eslint",
+  "plugins": ["prettier"],
   "rules": {
     "array-bracket-spacing": [2, "always"],
     "jsx-quotes": [1, "prefer-single"],

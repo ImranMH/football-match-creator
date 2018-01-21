@@ -4,9 +4,18 @@ var dbUser = 'movieGossip';
 var dbPassword = 'imran2020';
 const development = 'mongodb://127.0.0.1:27017/'+dbDev;
 const production = 'mongodb://'+dbUser+':'+dbPassword+'@ds139817.mlab.com:39817/'+dbPro;
+// const options = {
+//   server: { poolSize: 1 }
+// }
+// optional options no need to use
 const options = {
-  server: { poolSize: 1 }
-}
+  autoIndex: false, // Don't build indexes
+  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+  reconnectInterval: 500, // Reconnect every 500ms
+  poolSize: 10, // Maintain up to 10 socket connections
+  // If not connected, return errors immediately rather than waiting for reconnect
+  bufferMaxEntries: 0
+};
 
 module.exports = (mongoose) => {
 	
@@ -19,7 +28,7 @@ module.exports = (mongoose) => {
    if (process.env.port) {
        connectingString = production
   }
-  mongoose.connect(connectingString);
+  mongoose.connect(connectingString, options);
  // mongoose.connect(connectingString, configDB.options);
   var db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
@@ -28,9 +37,6 @@ module.exports = (mongoose) => {
     console.log('database now connected!!!!');
 
   });
-  db.on('connect', function () {
-      console.log('database hit')
-  })
 
 }
 

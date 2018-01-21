@@ -20,6 +20,7 @@ const app = express()
 // mongoDB conncetion using mongoose ......................
   /* Database Stuff................................*/
   const database = require('./config/database')(mongoose);
+  mongoose.Promise = q;
   
 
 //..................middleware function ........................*/
@@ -39,8 +40,8 @@ app.use('/api/match',match)
 //app.get('/', (req, res) => res.send('Hello World!'))
 app.get('/apis/test', (req, res) => res.json({name:'imran', from:'express'}))
 app.post('/apis/test', (req, res) => {
-	var data = req.body;
-	console.log(data);
+	const {user} = req.body;
+	console.log(user);
 	res.json(data)
 })
 
