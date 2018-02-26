@@ -4,7 +4,9 @@ const Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
  
 const MatchSchema = new Schema({
-		matchNo 	: Number,
+    matchNo 	: Number,
+    teamOne: { type: Schema.Types.ObjectId, ref: "TeamModel" },
+    teamTwo: { type: Schema.Types.ObjectId, ref: "TeamModel" },
     winner    : {type: Schema.Types.ObjectId, ref: "TeamModel"},
     looser    :{type: Schema.Types.ObjectId, ref: "TeamModel"},
     drow 		: {type:Boolean, default: false},

@@ -1,5 +1,5 @@
 var dbDev = 'fifa2018';
-var dbPro = 'angularJs-chat';
+var dbPro = 'fifa2018';
 var dbUser = 'movieGossip';
 var dbPassword = 'imran2020';
 const development = 'mongodb://127.0.0.1:27017/'+dbDev;

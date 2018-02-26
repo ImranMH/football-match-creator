@@ -1,31 +1,39 @@
 import React from 'react';
-import {Route, Switch, Link} from 'react-router-dom';
-import Home from './components/pages/homepage';
+import {Route, Switch} from 'react-router-dom';
+import TestRedux from './components/exper/ReduxHome';
+import Home from './container/homepage';
 import Prediction from './components/pages/Prediction';
-import { Tab } from 'semantic-ui-react'
-import FormInput from'./components/pages/formInput'
-const panes = [
-  { menuItem: 'Tab 1', render: () => <Tab.Pane attached={false}>Tab 1 Content</Tab.Pane> },
-  { menuItem: 'Tab 2', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
-  { menuItem: 'Tab 3', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
-]
+// //import { Tab } from './semantic/dist/semantic'
+import AddTeam from './container/AddTeam'
+import SingleTeam from'./container/SingleTeam'
+import EditTeam from'./container/EditTeam'
+import Fixture from'./container/Fixture'
+import Navigation from'./components/pages/Navigation'
 
-const TabExamplePointing = () => (
-  <Tab menu={{ pointing: true }} panes={panes} />
-)
+// const panes = [
+//   { menuItem: 'Tab 1', render: () => <Tab.Pane attached={false}>Tab 1 Content</Tab.Pane> },
+//   { menuItem: 'Tab 2', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
+//   { menuItem: 'Tab 3', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
+// ]
+
+// const TabExamplePointing = () => (
+//   <Tab menu={{ pointing: true }} panes={panes} />
+// )
 const App = (props) => {
 
+
   return (
-    <div className="ui container">
-    	<ul>
-	    	<Link to= "/home"> home</Link>
-	    	<Link to= "/prediction"> Predittion</Link>
-    	</ul>
+    <div className=" container">
+			<Navigation />
     	<div>
     		<Switch>
-	    		<Route exact path='/home' component={Home}/>
-	    		<Route path="/home/update"  component ={FormInput} />
+					<Route path="/" exact component={Home} />
+					<Route path='/test' component={TestRedux}/>
+	    		<Route path="/team/new"  component ={AddTeam} />
 	    		<Route path="/prediction"  component ={Prediction} />
+					<Route path="/team/:id/edit" component={EditTeam} />
+					<Route path="/team/:id" component={SingleTeam} />
+					<Route path="/fixture" component={Fixture} />
     		</Switch>
     	</div>
     </div>

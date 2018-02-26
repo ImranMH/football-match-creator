@@ -1,0 +1,1 @@
+export const BARE_TEAM_ADDED = 'BARE_TEAM_ADDED'

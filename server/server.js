@@ -42,7 +42,6 @@ app.get('/apis/test', (req, res) => res.json({name:'imran', from:'express'}))
 app.post('/apis/test', (req, res) => {
 	const {user} = req.body;
 	console.log(user);
-	res.json(data)
 })
 
-app.listen(port, () => console.log('Example app listening on port 3000!'))
+app.listen(port, () => console.log('Example app listening on port 3001!'))

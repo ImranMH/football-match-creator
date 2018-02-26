@@ -1,39 +1,24 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
+//import { Form, Button } from 'semantic-ui-react';
+//import { connect } from "react-redux";
+//import PropTypes from 'prop-types';
+import axios from 'axios';
+//import {addTeam} from '../../actions/add';
 import AddTeamForm from '../forms/AddTeamForm';
 
-export default class FormInput extends Component {
+class FormInput extends Component {
 	static propTypes = {
 		//submit: PropTypes.func.isRequired
 	}
-	// state = {
-	// 	data: {
-	// 		title:'',
-	// 		continent: '',
-	// 		group: '',
-	// 		flag: '',
-	// 		ranking: 0,
-	// 	},
-	// 	loading: false,
-	// 	errors: {}
-	// }
-	// onChange = e => this.setState({
-	// 	data: {...this.state.data,[e.target.name]: e.target.value }
-	// })
-	// submitHandle = e => {
-	// 	const errors = this.validator(this.state.data)
-	// 	this.setState({ errors })
-	// 	console.log(this.state)
-	// 	if(Object.keys(errors).length === 0) {
-	// 		this.props.submit = this.state.data;
-	// 	}
-	// }
-	teamSubmit = e => {
-		console.log(e)
+
+	teamSubmit = data => {
+		//this.props.addTeam(data).then()
+		axios.post('/api/team/addTeam',{data}).then(res=> {
+			console.log(res)
+		})
 	}
 	render() {
-
+		console.log(this)
 		return (
 			<div>
 				<h2>add Player</h2>
@@ -42,3 +27,8 @@ export default class FormInput extends Component {
 		);
 	}
 }
+// FormInput.propTypes = {
+// 	addTeam:PropTypes.func.isRequired
+// }
+export default FormInput
+//export default connect(null,{addTeam})(FormInput)
