@@ -11,7 +11,7 @@ function Navigation (props) {
         <Link to="/test"> test</Link>
       </li>
       <li>
-        <Link to="/prediction"> Not Implemented </Link>
+        <Link to="/prediction"> Win Pridictor </Link>
       </li>
       <li>
         <Link to="/fixture">Fixture </Link>
