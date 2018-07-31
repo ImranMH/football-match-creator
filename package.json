@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "express": "^4.16.2",
-    "mongoose": "^5.0.0",
+    "mongoose": "^5.0.17",
     "q": "^1.5.1"
   }
 }

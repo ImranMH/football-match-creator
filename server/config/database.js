@@ -9,12 +9,13 @@ const production = 'mongodb://'+dbUser+':'+dbPassword+'@ds139817.mlab.com:39817/
 // }
 // optional options no need to use
 const options = {
-  autoIndex: false, // Don't build indexes
-  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
-  reconnectInterval: 500, // Reconnect every 500ms
-  poolSize: 10, // Maintain up to 10 socket connections
-  // If not connected, return errors immediately rather than waiting for reconnect
-  bufferMaxEntries: 0
+  useNewUrlParser: true ,
+  // autoIndex: false, // Don't build indexes
+  // reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+  // reconnectInterval: 500, // Reconnect every 500ms
+  // poolSize: 10, // Maintain up to 10 socket connections
+  // // If not connected, return errors immediately rather than waiting for reconnect
+  // bufferMaxEntries: 0
 };
 
 module.exports = (mongoose) => {
@@ -31,6 +32,7 @@ module.exports = (mongoose) => {
   mongoose.connect(connectingString, options);
  // mongoose.connect(connectingString, configDB.options);
   var db = mongoose.connection;
+  mongoose.set("debug", true)
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', function() {
     // we're connected!

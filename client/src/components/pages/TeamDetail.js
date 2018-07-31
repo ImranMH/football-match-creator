@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 const DisplayTeamDetail = (props) => {
   const {team} = props
-
+  console.log(team)
   return (
     <div className="displayTeamDetail">
       <div className="teamSummery fc ">
@@ -24,6 +24,13 @@ const DisplayTeamDetail = (props) => {
         </div>
         <div className="teamPlayer fl_right">
             <h2>Player list</h2>
+            <ul>
+              {
+              team.players.map(player=>{
+                return <PlayerList player={player}  />
+              })
+              }
+            </ul>
         </div>
       </div>
 
@@ -31,3 +38,17 @@ const DisplayTeamDetail = (props) => {
   )
 }
 export default DisplayTeamDetail;
+
+
+const PlayerList = (props) => {
+  const {player} = props
+  return (
+    <li>
+      <Link to="" >{player.name}</Link>
+      <div>{player.club}</div>
+      <div>{player.age}</div>
+    </li>
+  )
+}
+
+

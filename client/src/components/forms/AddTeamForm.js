@@ -85,7 +85,8 @@ import { withRouter } from "react-router-dom";
           </fieldset> */}
           <fieldset>
             <label htmlFor="ranking"> Continent</label>
-            <select className="form-control" name="continent" value={data.continent} onChange={this.onChange}>
+            <select className="custom-select mr-sm-2" name="continent" value={data.continent} onChange={this.onChange}>
+              <option defaultValue='' > Select a Continent</option>
               <option value="europe">Europe</option>
               <option value="south_america">South America</option>
               <option value="asia">Asia</option>

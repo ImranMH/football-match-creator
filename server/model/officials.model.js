@@ -1,15 +1,16 @@
 
-module.exports = function(mongoose) {
 
-const OfficialSchema = require('../schema/player.schema')(mongoose)
+const q = require('q')
+const mongoose = require('mongoose')
+const OfficialSchema = require('../schema/officials.schema')
 
-const OfficialModel = mongoose.model('official', OfficialSchema);
+const OfficialModel = mongoose.model('OfficialModel', OfficialSchema);
 
 	let api = {
 	addTeam,
 	updateTeam,
 }
-return api;
+module.exports = api
 
 	/*apis functtions ......................*/
 	function addTeam(){
@@ -19,4 +20,3 @@ return api;
 		
 	}
 
-}

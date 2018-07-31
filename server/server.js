@@ -7,22 +7,24 @@ const app = express()
 
 /* local resourec calling ...............................*/
 //model 
-	const Model = require('./model')(mongoose,q);
-  const TeamModel = Model.team;
-	const PlayerModel = Model.player;
-	const MatchModel = Model.match;
+	
+ 
 
-	//routes
-	const team = require('./routes/team.ctrl')(express,Model)
-	const player = require('./routes/player.ctrl')(express,Model)
-	const match = require('./routes/match.ctrl')(express,Model)
+	
 
 // mongoDB conncetion using mongoose ......................
   /* Database Stuff................................*/
   const database = require('./config/database')(mongoose);
   mongoose.Promise = q;
-  
+// var Player = require('./model/player.model');
+// var Team = require('./model/team.model');
+// var Match = require('./model/match.model');
 
+
+//routes
+const team = require('./routes/team.ctrl')(express)
+const player = require('./routes/player.ctrl')(express)
+const match = require('./routes/match.ctrl')(express)
 //..................middleware function ........................*/
 
 app.use(express.json())

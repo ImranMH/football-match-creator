@@ -1,23 +1,25 @@
 //const mongoose = require('mongoose');
-module.exports = function( mongoose) {
-
-const Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
+    //ObjectId = Schema.ObjectId;
  
 const PlayerSchema = new Schema({
-    userId    :{type: Schema.Types.ObjectId, ref: "TeamModel"},
+    userId: { type: Schema.Types.ObjectId, ref: "Team"},
     name     : String,
     age      : Number,
     club      : String,
+    clubOrigin      : String,
     jersey      : String,
-    country      : {type: Schema.Types.ObjectId, ref: "TeamModel"},
+    country: {
+        type: Schema.Types.ObjectId,
+        ref: "Team"
+    },
     position      : String,
+    image      : String,
     goal      : Number,
 	});
 
-
+module.exports = PlayerSchema
 //const PlayerModel = mongoose.model('PlayerModel', PlayerSchema);
 
 
-return  PlayerSchema;
-}

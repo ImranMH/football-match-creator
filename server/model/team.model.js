@@ -1,35 +1,58 @@
-module.exports = function(mongoose, q) {
+const q = require('q')
+const mongoose = require('mongoose')
 
-const TeamSchema = require('../schema/team.schema')(mongoose);
 
-const TeamModel = mongoose.model('Team', TeamSchema);
+	// const TeamSchema = require('../schema/t.s')(mongoose);
+
+const TeamSchema = require('../schema/team.schema');
+const Team = mongoose.model('Team', TeamSchema);
+
 let api = {
 	getTeamById,
 	getTeam,
 	createTeam,
 	updateTeam,
-	deteteTeamById
+	deteteTeamById,
+	findTeamsByNames,
+	findTeamsByName,
+	findByIds,
+	addPlayer
 }
-return api;
 
-	/*apis functtions ......................*/
-	// async function getTeamById(data,callback){
-	// 		const fakedata = [
-	// 			{name:'Brazil',continent:"South America", rank: 1},
-	// 			{name:'Iran',continent:"Asia", rank: 31},
-	// 			{name:'Spain',continent:"Europe", rank: 3}
-	// 	]
-	// 	fakedata.push(data)
-	// 	callback(fakedata)
-	// }
-	function getTeamById(id) {
+	module.exports = api
+
+	function getTeamById(team) {
 		var deferred = q.defer();
+		Team.findById(team).populate('players').populate('matches').exec(function (err, user){
+		
+				if (err) {
+					deferred.reject(err)
+				}
+				deferred.resolve(user)
 
-		TeamModel.findById(id, (err, user) => {
+		})
+		return deferred.promise;
+	}
+	/*  find match */
+	function findByIds(match) {
+		var deferred = q.defer();
+		Team.find({ '_id': { $in: [match.teamOne, match.teamTwo] } }, function (err, teams) {
+
 			if (err) {
 				deferred.reject(err)
 			}
-			deferred.resolve(user)
+			teams.forEach(team=>{
+				team.matches.push(match._id)
+				team.save((err, res)=>{
+					if(err){
+						deferred.reject(err)
+					}
+					console.log('successfully save')
+					console.log(team)
+				})
+			})
+			//deferred.resolve(teams)
+
 		})
 		return deferred.promise;
 	}
@@ -37,25 +60,25 @@ return api;
 	/*get movie json data*/
 	function getTeam() {
 		var deferred = q.defer();
-		// TeamModel.find({}).sort({ "_id":-1 }).populate('players').exec(function(err,item){
-		// 	if(err){
-		// 		deferred.reject(err)
-		// 	}
-		// 	console.log(item)
-		// 	deferred.resolve(item)
-		// })
-		TeamModel.find({},(err,user)=>{
-		if(err){
-			deferred.reject(err)
+		Team.find({}).populate('players').exec(function(err,item){
+			if(err){
+				deferred.reject(err)
 			}
-			deferred.resolve(user)
+			console.log('all team generate here')
+			deferred.resolve(item)
 		})
+		// Team.find({},(err,user)=>{
+		// if(err){
+		// 	deferred.reject(err)
+		// 	}
+		// 	deferred.resolve(user)
+		// })
 		return deferred.promise;
 	}
 		/*create a team from ombd apis..............................*/
 	async function createTeam(newTeamData) {
 		var deferred = q.defer();								
-		var newTeam = new TeamModel({							
+		var newTeam = new Team({							
 			title: newTeamData.title,
 			continent: newTeamData.continent,
 			group: newTeamData.group,
@@ -75,7 +98,7 @@ return api;
 			/*create a team from ombd apis..............................*/
 /*	async function createTeam(newTeamData) {
 			var deferred = q.defer();
-			TeamModel.findOne({'title': newTeamData.title}, function(err, link){
+			Team.findOne({'title': newTeamData.title}, function(err, link){
 				if(err){
 					
 					deferred.reject(err)
@@ -83,7 +106,7 @@ return api;
 						deferred.reject({msg:'link already exist', link:link})
 				}else {
 												
-					var newTeam = new TeamModel({							
+					var newTeam = new Team({							
 						title: newTeamData.title,
 						continent: newTeamData.continent,
 						group: newTeamData.group,
@@ -107,7 +130,7 @@ return api;
 
 	function updateTeam(teamId, data) {
 		var deferred = q.defer();	
-		TeamModel.findById(teamId, function(err, team){
+		Team.findById(teamId, function(err, team){
 			if(err) {
 				deferred.reject(err)
 			} 
@@ -132,12 +155,12 @@ return api;
 	}
 	// function updateTeam(teamId, data) {
 	// 	var deferred = q.defer();
-	// 	TeamModel.findById(teamId, function (err, team) {
+	// 	Team.findById(teamId, function (err, team) {
 	// 		if (err) {
 	// 			deferred.reject(err)
 	// 		} else {
 	// 			//update fields
-	// 			for (var field in TeamModel.schema.paths) {
+	// 			for (var field in Team.schema.paths) {
 	// 				if ((field !== '_id') && (field !== '__v')) {
 
 	// 					if (data[field] !== undefined) {
@@ -157,7 +180,7 @@ return api;
 	function deteteTeamById(id) {
 		var status = {}
 		var deferred = q.defer()
-		TeamModel.findById(id, function (err, team) {
+		Team.findById(id, function (err, team) {
 			if (err) {
 				deferred.reject(err)
 			} else {
@@ -175,8 +198,57 @@ return api;
 		})
 		return deferred.promise;
 	};
+/* for create match teams */
+	function findTeamsByNames(n1,n2) {
+		console.log('team model find by names')
+		var status = {}
+		var deferred = q.defer()
+		Team.find({ title: { "$in": [n1, n2] }}, function (err, team) {
+			if (err) {
+				deferred.reject(err)
+			} else {
+				deferred.resolve(team)
+
+			}
+		})
+		return deferred.promise;
+	}
+
+	/* for add ing new player............. */
+	/* first find team name from database............. */
+	function findTeamsByName(name) {
+		var deferred = q.defer()
+		Team.findOne({ title: name }, function (err, team) {
+			if (err) {
+				deferred.reject(err)
+			} else {
+				deferred.resolve(team)
+
+			}
+		})
+		return deferred.promise;
+	}
+
+	/* add player */
+	function addPlayer(team,playerId) {
+
+		var deferred = q.defer()
+		Team.findById(team._id, function (err, team) {
+			if (err) {
+				deferred.reject(err)
+			} else {
+				team.players.push(playerId);
+				team.save((err, result)=>{
+					if (err) {
+						deferred.reject(err)
+					}
+					deferred.resolve(result)
+				})
+			}
+		})
+		return deferred.promise;
+	}
 
 
-}
 
 

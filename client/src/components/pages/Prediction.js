@@ -5,6 +5,7 @@ const Prediction = (props) => {
     <div>
 
     	<h1> Prediction page </h1>
+      <p> not Implemented yet </p>
     </div>
   )
 }

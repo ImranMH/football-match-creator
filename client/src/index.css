@@ -136,3 +136,9 @@ button{
 .tableItem{
 
 }
+
+.fixture_area{
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 10px 0;
+}

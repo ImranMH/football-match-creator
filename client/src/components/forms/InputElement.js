@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
-const InputElement = ({ nil, type, placeholder, value, onchange, label }) => {
+const InputElement = ({ nil,cnc,cni, type, placeholder, value, onchange, label }) => {
   return (
-    <fieldset>
+    <fieldset className={cnc}>
       <label htmlFor={nil}> {label} </label>
-      <input className="form-control" type={type} id={nil} name={nil} placeholder={placeholder} value={value} onChange={onchange} />
+      <input className= {cni} type={type} id={nil} name={nil} placeholder={placeholder} value={value} onChange={onchange} />
     </fieldset>
   )
 }
@@ -15,9 +15,13 @@ InputElement.propTypes = {
   onChange: PropTypes.func,
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  cnc: PropTypes.string,
+  cni: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
 }
 InputElement.defaultProps = {
-  type: 'text'
+  type: 'text',
+  cnc: 'form-group',
+  cni: 'form-control'
 }
 export default InputElement;

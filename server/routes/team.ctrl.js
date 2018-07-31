@@ -1,9 +1,12 @@
 // app.use('/api/team',team)
 
-module.exports = (express,model) => {
+module.exports = (express) => {
+	var Team = require('../model/team.model');
+	var Match = require('../model/match.model');	
+	
 	const router = express.Router();
-	const TeamModel = model.team;
-	console.log('team ctrl');
+
+
 
 	/* setting apis end point routes*/
 	router.post('/addTeam', addTeam);
@@ -19,7 +22,7 @@ module.exports = (express,model) => {
 		let data = req.body;
 		 data.title.toLowerCase()
 		 data.group.toUpperCase()
-		TeamModel.createTeam(data).then(response=>{
+		Team.createTeam(data).then(response=>{
 			res.json(response)
 		},error=>{
 			res.json(error)
@@ -29,7 +32,7 @@ module.exports = (express,model) => {
 	// 	console.log('posted')
 	// 	let data = req.body;
 	// 	console.log(data)
-	// 	TeamModel.addTeam(data,(response)=>{
+	// 	Team.addTeam(data,(response)=>{
 	// 		console.log(response);
 	// 		res.json(response)
 	// 	})
@@ -38,7 +41,7 @@ module.exports = (express,model) => {
 		console.log('send')
 		let data = req.body;
 		res.json(data)
-		// TeamModel.addTeam(data,(response)=>{
+		// Team.addTeam(data,(response)=>{
 		// 	console.log(response);
 		// 	res.json(response)
 		// })
@@ -46,21 +49,21 @@ module.exports = (express,model) => {
 	/*function srart from here*/
 	function getAllTeamin(req, res) {
 		const data = 	{name:'Maxico',continent:"North America", rank: 21}
-		TeamModel.addTeam(data,(response)=>{
+		Team.addTeam(data,(response)=>{
 			res.json(response)
 		})
 	}
 		/*function srart from here*/
 	function getAllTeam(req, res) {
-		TeamModel.getTeam().then(data=>{
+		Team.getTeam().then(data=>{
 			res.json(data)
 		})
 	}
 
 	/*function srart from here*/
 	function getSingleTeam(req, res) {
-		const id = req.params.id
-		TeamModel.getTeamById(id).then(data => {
+		const team= req.params.id
+		Team.getTeamById(team).then(data => {
 			res.json(data)
 		})
 	}
@@ -69,7 +72,7 @@ module.exports = (express,model) => {
 		
 		const id = req.params.id
 		data= req.body.data
-		TeamModel.updateTeam(id,data).then(data => {
+		Team.updateTeam(id,data).then(data => {
 			console.log(data)
 		return res.json(data)
 		})
@@ -77,7 +80,7 @@ module.exports = (express,model) => {
 	/*function detete team */
 	function DeleteSingleTeam(req, res) {
 		const id = req.params.id
-		TeamModel.deteteTeamById(id).then(data => {
+		Team.deteteTeamById(id).then(data => {
 			res.json(data)
 		}) 
 	}

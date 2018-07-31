@@ -10,10 +10,11 @@ export default {
 		addNew: (team) =>{
 			return axios.post('/api/team/addTeam', team)
 		},
-		single: (dataid)=> {
-		return axios.get('/api/team/'+dataid.id, {
+		single: (team)=> {
+			console.log(team.id)
+		return axios.get('/api/team/'+team.id, {
 				params: {
-					id: dataid.id
+					id: team.id
 				}} )
 		},
 		editTeam: (id,data) => {
@@ -35,5 +36,22 @@ export default {
 		},
 		addTeam: data => 
 			axios.post('/api/team/addTeam',{data}).then(res=> res.data)
+	},
+	match:{
+		addMatch: (data) => {
+			console.log(data);
+			return axios.post('/api/match/newMatch', data)
+		},
+		allMatches: () => {
+			return axios.get('/api/match')
+		}
+	},
+	player:{
+		addPlayer: (player) => {
+			return axios.post('/api/player/addPlayer', player)
+		},
+		allPlayer: () => {			
+			return axios.get('/api/player/allPlayer')
+		}
 	}
 }

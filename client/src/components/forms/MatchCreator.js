@@ -15,7 +15,6 @@ class MatchCreator extends Component {
 
   }
   groupOnchange = (e) => {
-    console.log('click')
     const groupKey = e.target.value;
     const data = this.props.teams.filter(team => {
       if (team.group === groupKey) {
@@ -34,7 +33,6 @@ class MatchCreator extends Component {
   }
 
   updateGroup = (e) => {
-    console.log('updated')
     this.setState({ ...this.state,[e.target.name]: e.target.value }) 
   }
   clickFn =(e)=>{
@@ -51,14 +49,17 @@ class MatchCreator extends Component {
 
     return (
       <form>
+     
       <div className="form-row">
-          <SelectInput onchange={this.updateGroup} data={grouped}  nil={'teamOne'} label={"Team One"} dftvlu="Select Team" />
-          <SelectInput onchange={this.updateGroup} data={grouped}   nil={'teamTwo'} label={"Team Two"} dftvlu="Select Oponent" />
-              
-      </div>
-      <div className="form-row">
+          <InputElement onchange={this.updateGroup} nil={'matchNo'} cnc="form-group col-md-6" type={'number'} label={'Match No:'}
+            placeholder={'Match No'} />
           <SelectInput onchange={this.groupOnchange} data={data} nil={'group'} label={"Select a group"} dftvlu="Select Group" />
           <SelectInput nil={'stadium'} onchange={this.updateGroup} label={"Select a stadium"} dftvlu="Select stadium" />
+      </div>
+      <div className="form-row">
+        <SelectInput onchange={this.updateGroup} data={grouped} nil={'teamOne'} label={"Team One"} dftvlu="Select Team" />
+        <SelectInput onchange={this.updateGroup} data={grouped} nil={'teamTwo'} label={"Team Two"} dftvlu="Select Oponent" />
+
       </div>
       <div className="form-row">
         

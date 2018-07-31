@@ -8,6 +8,7 @@ import AddTeam from './container/AddTeam'
 import SingleTeam from'./container/SingleTeam'
 import EditTeam from'./container/EditTeam'
 import Fixture from'./container/Fixture'
+import Players from'./container/PlayerHome'
 import Navigation from'./components/pages/Navigation'
 
 // const panes = [
@@ -34,6 +35,7 @@ const App = (props) => {
 					<Route path="/team/:id/edit" component={EditTeam} />
 					<Route path="/team/:id" component={SingleTeam} />
 					<Route path="/fixture" component={Fixture} />
+					<Route path="/players" component={Players} />
     		</Switch>
     	</div>
     </div>
