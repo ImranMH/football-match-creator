@@ -28,15 +28,7 @@ module.exports = (express) => {
 			res.json(error)
 		})
 	}
-	// function addTeam(req, res) {
-	// 	console.log('posted')
-	// 	let data = req.body;
-	// 	console.log(data)
-	// 	Team.addTeam(data,(response)=>{
-	// 		console.log(response);
-	// 		res.json(response)
-	// 	})
-	// }
+
 	function send(req, res) {
 		console.log('send')
 		let data = req.body;
@@ -69,12 +61,14 @@ module.exports = (express) => {
 	}
 	/*function detete team */
 	function editSingleTeam(req, res) {
-		
+		let data = req.body.data;
+		 data.title.toLowerCase()
+		 data.group.toUpperCase()
 		const id = req.params.id
-		data= req.body.data
 		Team.updateTeam(id,data).then(data => {
-			console.log(data)
-		return res.json(data)
+			Team.getTeamById(data._id).then(data => {
+				res.json(data)
+			})
 		})
 	}
 	/*function detete team */

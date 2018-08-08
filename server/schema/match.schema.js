@@ -14,6 +14,7 @@ const MatchSchema = new Schema({
     loseScore     : Number,
     scorer      : [{type: Schema.Types.ObjectId, ref: "PlayerModel"}],
     group      : String,
+    finished : Boolean,
     playDate : Date,
     playTime : String,
     stadium : String

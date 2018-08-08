@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { allPayer } from '../actions/player';
 import PlayerList from '../components/pages/PlayerList';
-
+console.log('player home');
 class PlayerHome extends Component {
   componentDidMount = () => {
     this.props.getPlayer()
@@ -11,8 +11,7 @@ class PlayerHome extends Component {
   }
   renderDetail() {
     const { players } = this.props;
-    console.log(players)
-    if (players) {
+    if (players.length > 0) {
       return <PlayerList players={players} />
     } else {
       return <div> Loading ... </div>
@@ -28,7 +27,7 @@ class PlayerHome extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    players: state.player
+    players: state.player.players
   }
 }
 function matchDispatchToProps(dispatch) {

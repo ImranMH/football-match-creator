@@ -15,7 +15,7 @@ const app = express()
 // mongoDB conncetion using mongoose ......................
   /* Database Stuff................................*/
   const database = require('./config/database')(mongoose);
-  mongoose.Promise = q;
+  // mongoose.Promise = q;
 // var Player = require('./model/player.model');
 // var Team = require('./model/team.model');
 // var Match = require('./model/match.model');

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
-const SelectInput = ({data, nil, dftvlu, value, onchange, label, cnc,cns }) => {
+const SelectInput = ({ data, nil, dftvlu, value, onChange, label, cnc,cns }) => {
  const options = (data) =>{
   if(data){
     return data.map((opt,index) => {
@@ -14,7 +14,7 @@ const SelectInput = ({data, nil, dftvlu, value, onchange, label, cnc,cns }) => {
     
   <div className={cnc}>
       <label htmlFor={nil} >{label}</label>
-      <select className={cns} id={nil} name={nil} value={value} onChange={onchange}>
+      <select className={cns} id={nil} name={nil} value={value} onChange={onChange}>
         <option defaultValue ='' > {dftvlu}</option>
         {options(data) }
       </select>

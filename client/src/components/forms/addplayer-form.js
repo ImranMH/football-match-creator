@@ -30,7 +30,7 @@ class AddPlayerForm extends Component {
   }
   componentDidMount = () => {
     if(this.props.team) {
-      console.log(this.props.team)
+
     }
   }
   
@@ -38,10 +38,8 @@ class AddPlayerForm extends Component {
     player: { ...this.state.player, [e.target.name]: e.target.value }
   })
   submitHandle = e => {
-    console.log(this.state)
     e.preventDefault()
     const errors = this.validator(this.state.player)
-    console.log(errors)
     this.setState({ errors: errors })
     if (Object.keys(errors).length === 0) {
       let data = this.state.player
@@ -69,7 +67,7 @@ class AddPlayerForm extends Component {
       const data = this.props.team.map(team => {
         return team.title
       })
-      return <SelectInput nil={'country'} data={data} label={"country"} onchange={this.onChange} dftvlu="Select Country" /> 
+      return <SelectInput nil={'country'} data={data} label={"country"} onChange={this.onChange} dftvlu="Select Country" /> 
     } else {
       return <div className="loading">Loading...</div>
     }
@@ -82,19 +80,19 @@ class AddPlayerForm extends Component {
         <form onSubmit={this.submitHandle}>
 
           <InputElement nil={'name'} label={'Name Of The player'}
-            placeholder={'Messi'} value={player.name} onchange={this.onChange} />
+            placeholder={'Messi'} value={player.name} onChange={this.onChange} />
           <InputElement nil={'age'} type={'number'} label={'Age'}
-            placeholder={'D'} value={player.age} onchange={this.onChange} />
+            placeholder={'D'} value={player.age} onChange={this.onChange} />
           <InputElement nil={'club'} label={'Club'}
-            placeholder={'Club'} value={player.club} onchange={this.onChange} />
+            placeholder={'Club'} value={player.club} onChange={this.onChange} />
           <InputElement nil={'clubOrigin'}  label={'country of the Club'}
-            placeholder={"Spain"} value={player.clubOrigin} onchange={this.onChange} />
+            placeholder={"Spain"} value={player.clubOrigin} onChange={this.onChange} />
           <InputElement nil={'position'}  label={'Position of Player'}
-            placeholder={"sticker"} value={player.position} onchange={this.onChange} />
+            placeholder={"sticker"} value={player.position} onChange={this.onChange} />
           <InputElement nil={'jersey'} label={'Jersey No'}
-            placeholder={"10"} value={player.jersey} onchange={this.onChange} />
+            placeholder={"10"} value={player.jersey} onChange={this.onChange} />
           <InputElement nil={'image'} label={'player photo'}
-            placeholder={"ronaldo"} value={player.image} onchange={this.onChange} />
+            placeholder={"ronaldo"} value={player.image} onChange={this.onChange} />
           {this.showCountry()}
 
           <button className="btn btn-primary" type="submit" > {this.props.btnText} </button>

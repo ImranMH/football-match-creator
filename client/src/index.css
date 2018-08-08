@@ -142,3 +142,53 @@ button{
   padding: 5px;
   margin: 10px 0;
 }
+
+
+
+li.playerList {
+  margin: 0px;
+  list-style-type: none;
+  border: solid 1px #ccc;
+  padding: 5px;
+  display: inline-block;
+  text-transform: capitalize;
+  background: #117a8b;
+  text-align: center;
+  margin-right: 5px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.matchFixure{
+clear: both;
+margin-bottom: 10px;
+background: #dee2e6;
+overflow: hidden;
+padding: 5px;
+width: 60%;
+min-width: 350px;
+text-transform: capitalize;
+}
+.matchFixure .left{
+  float: left;
+  font-size: 15px;
+  text-align: right;
+}
+.matchFixure .right {
+  float: right;
+  font-size: 15px;
+}
+.scoreLine{
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  background: #fff;
+  font-weight: 700;
+}
+.matchFixure span{
+  margin: 5px;
+}
+.playerList h2{
+  color:#fff
+}
+.playerList div {
+  color: #ccc
+}

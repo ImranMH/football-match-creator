@@ -18,7 +18,8 @@ class EditTeam extends Component {
   }
   teamSubmit = data => {
     let id = this.props.match.params.id
-    this.props.editTeam(data, id).then(() => {
+    this.props.editTeam(data, id).then((data) => {
+      console.log(data);
       this.props.history.push("/team/" + id);
     })
   }

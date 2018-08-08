@@ -7,14 +7,11 @@ import  DisplayTeamDetail  from '../components/pages/TeamDetail';
 class SingleTeam extends Component {
   componentDidMount = () => {
     let params = this.props.match.params;
-    console.log(params)
     this.props.getTeam(params)
-    console.log(this.props.getTeam(params));
-    console.log(this.props.singleTeam);
   }
   renderDetail() {
     const { singleTeam } = this.props;
-    console.log(singleTeam)
+
     if (singleTeam) {
       return <DisplayTeamDetail team={singleTeam} />
     } else {
@@ -34,7 +31,7 @@ const mapStateToProps = (state) => {
     singleTeam: state.team
   }
 }
-function matchDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getTeam: team }, dispatch)
 }
-export default connect(mapStateToProps, matchDispatchToProps)(SingleTeam);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTeam);

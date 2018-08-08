@@ -17,7 +17,7 @@ function Navigation (props) {
         <Link to="/fixture">Fixture </Link>
       </li>
       <li>
-        <Link to="/players">Players </Link>
+        <Link to="/player">Players </Link>
       </li>
       <li>
         <Link to="/team/new"> Add New </Link>

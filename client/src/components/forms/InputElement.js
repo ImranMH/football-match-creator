@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
-const InputElement = ({ nil,cnc,cni, type, placeholder, value, onchange, label }) => {
+const InputElement = ({ nil, cnc, cni, type, placeholder, value, onChange, label }) => {
   return (
     <fieldset className={cnc}>
       <label htmlFor={nil}> {label} </label>
-      <input className= {cni} type={type} id={nil} name={nil} placeholder={placeholder} value={value} onChange={onchange} />
+      <input className= {cni} type={type} id={nil} name={nil} placeholder={placeholder} value={value} onChange={onChange} />
     </fieldset>
   )
 }

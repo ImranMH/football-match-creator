@@ -8,7 +8,6 @@
 const MatchModel = mongoose.model('MatchModel', MatchSchema);
 // const TeamModel = mongoose.model('Team', TeamSchema);
 let api = {
-	showAll,
 	createMatch,
 	updateTeam,
 	getMatch,
@@ -33,49 +32,15 @@ module.exports = api
 			})
 			return deferred.promise;
 		};
-	function showAll(){
-		var deferred = q.defer();
-		console.log('match model')
-		// MatchModel.find({} ,(err, result) => {
-		// 	if (err) {
-		// 		deferred.reject(err)
-		// 	}
-		// 	deferred.resolve(result)
-		// })
-		// MatchModel.findById('5a7b4f9340ce191d3c504ac1').populate('teamOne').exec((err, result) => {
-		// 	if (err) {
-		// 		deferred.reject(err)
-		// 	}
-		// 	console.log(result)
-		// 	deferred.resolve(result)
-		// })
-		MatchModel.find()
-			// .populate('teamOne')
-			.exec( function (err, result)  {
-			if (err) {
-				deferred.reject(err)
-			}
-			console.log(result)
-			deferred.resolve(result)
-		}) 
 
-		return deferred.promise;
-	}
 	
 	function getMatch(match) {
-		var deferred = q.defer();
-		MatchModel.find()
+		// var deferred = q.defer();
+		return MatchModel
+			.find()
 			.populate('teamOne')
 			.populate('teamTwo')
-			.exec(function (err,user) {
-
-				if (err) {
-					 deferred.reject(err)
-				}
-				deferred.resolve(user)
-
-			})
-		 return deferred.promise;
+			.exec()
 	}
 	function createMatch(data) {
 		var deferred = q.defer();

@@ -10,6 +10,7 @@ import EditTeam from'./container/EditTeam'
 import Fixture from'./container/Fixture'
 import Players from'./container/PlayerHome'
 import Navigation from'./components/pages/Navigation'
+import  SinglePlayer  from './container/SinglePlayer';
 
 // const panes = [
 //   { menuItem: 'Tab 1', render: () => <Tab.Pane attached={false}>Tab 1 Content</Tab.Pane> },
@@ -35,7 +36,9 @@ const App = (props) => {
 					<Route path="/team/:id/edit" component={EditTeam} />
 					<Route path="/team/:id" component={SingleTeam} />
 					<Route path="/fixture" component={Fixture} />
-					<Route path="/players" component={Players} />
+					<Route path="/player/:id" component={SinglePlayer} />
+					<Route path="/player" component={Players} />
+					
     		</Switch>
     	</div>
     </div>

@@ -11,14 +11,13 @@ export default {
 			return axios.post('/api/team/addTeam', team)
 		},
 		single: (team)=> {
-			console.log(team.id)
 		return axios.get('/api/team/'+team.id, {
 				params: {
 					id: team.id
 				}} )
 		},
 		editTeam: (id,data) => {
-			console.log('here')
+
 			return axios.put('/api/team/' + id, {
 				params: {
 					id: id
@@ -27,7 +26,7 @@ export default {
 			})
 		},
 		deleteTeam: (id) => {
-			console.log('here')
+
 			return axios.delete('/api/team/' + id, {
 				params: {
 					id: id
@@ -39,7 +38,7 @@ export default {
 	},
 	match:{
 		addMatch: (data) => {
-			console.log(data);
+
 			return axios.post('/api/match/newMatch', data)
 		},
 		allMatches: () => {
@@ -50,8 +49,21 @@ export default {
 		addPlayer: (player) => {
 			return axios.post('/api/player/addPlayer', player)
 		},
+		editPlayer: (player) => {
+			return axios.put('/api/player/'+ player._id, player)
+		},
+		deleteById: (id) => {
+			return axios.delete('/api/player/'+id)
+		},
 		allPlayer: () => {			
 			return axios.get('/api/player/allPlayer')
+		},
+		getPlayerById: (player) => {			
+			return axios.get('/api/player/'+player.id, {
+				params: {
+					id: player.id
+				}
+			})
 		}
 	}
 }

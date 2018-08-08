@@ -65,13 +65,13 @@ componentWillMount = () => {
         <form onSubmit={this.submitHandle}>
    
           <InputElement nil={'title'} label={'Name Of The Country'}
-            placeholder={'brazil'} value={data.title} onchange={this.onChange} />
+            placeholder={'brazil'} value={data.title} onChange={this.onChange} />
           <InputElement nil={'group'} label={'Group'}
-            placeholder={'D'} value={data.group} onchange={this.onChange} />
+            placeholder={'D'} value={data.group} onChange={this.onChange} />
           <InputElement nil={'flag'} label={'flag'}
-            placeholder={'br'} value={data.flag} onchange={this.onChange} />
+            placeholder={'br'} value={data.flag} onChange={this.onChange} />
           <InputElement nil={'ranking'} type={'number'} label={'Ranking'}
-            placeholder={'2'} value={data.ranking} onchange={this.onChange} />
+            placeholder={'2'} value={data.ranking} onChange={this.onChange} />
 
           <fieldset>
             <label htmlFor="ranking"> Continent</label>

@@ -23,13 +23,11 @@ export const teams = () => {
 }
 
 export const team = (id) => {
-
 	const items = api.team.single(id)
 	
 	return (dispatch) => {
 		
 		return items.then(team => {
-			console.log(team)
 			dispatch({
 				type: "SHOW_TEAM_BYID",
 				payload: team.data
@@ -51,13 +49,13 @@ export const addTeam = (team) => {
 
 }
 export const editTeam = (data,id) => {
-
 	const EditItem = api.team.editTeam(id,data)
 
 	return (dispatch) => {
 		return EditItem.then(team => {
+			console.log(team)
 			dispatch({
-				type: "EDIT_ITEM",
+				type: "EDIT_TEAM",
 				payload:team.data
 			})
 		})

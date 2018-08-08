@@ -22,8 +22,9 @@ class AddTeam extends Component {
     })
   }
   addPlayer = data => {
-    this.props.addPlayer(data)
-    console.log(data)
+    this.props.addPlayer(data).then(player=>{
+      console.log(player);
+    })
   }
   render() {
     if(this.props.team) {

@@ -4,7 +4,7 @@ const team = function(state = null, action={}) {
     case 'SHOW_TEAM_BYID': {
       return action.payload
     }
-    case 'EDIT_ITEM': {
+    case 'EDIT_TEAM': {
       return action.payload
     }
     case 'ADD_TEAM': {

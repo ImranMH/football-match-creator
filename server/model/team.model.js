@@ -16,6 +16,7 @@ let api = {
 	findTeamsByNames,
 	findTeamsByName,
 	findByIds,
+	deletePlayerById,
 	addPlayer
 }
 
@@ -35,27 +36,40 @@ let api = {
 	}
 	/*  find match */
 	function findByIds(match) {
-		var deferred = q.defer();
-		Team.find({ '_id': { $in: [match.teamOne, match.teamTwo] } }, function (err, teams) {
 
-			if (err) {
-				deferred.reject(err)
-			}
-			teams.forEach(team=>{
-				team.matches.push(match._id)
-				team.save((err, res)=>{
-					if(err){
-						deferred.reject(err)
-					}
-					console.log('successfully save')
-					console.log(team)
+		return Team
+			.find({ '_id': { $in: [match.teamOne, match.teamTwo] } })
+			.then(function ( teams) {
+				teams.forEach(team => {
+					team.matches.push(match._id)
+					team.save()
 				})
 			})
-			//deferred.resolve(teams)
-
-		})
-		return deferred.promise;
 	}
+
+/*  find match */
+// function findByIds(match) {
+// 	var deferred = q.defer();
+// 	Team.find({ '_id': { $in: [match.teamOne, match.teamTwo] } }, function (err, teams) {
+
+// 		if (err) {
+// 			deferred.reject(err)
+// 		}
+// 		teams.forEach(team => {
+// 			team.matches.push(match._id)
+// 			team.save((err, res) => {
+// 				if (err) {
+// 					deferred.reject(err)
+// 				}
+// 				console.log('successfully save')
+// 				console.log(team)
+// 			})
+// 		})
+// 		//deferred.resolve(teams)
+
+// 	})
+// 	return deferred.promise;
+// }
 	/*........................................... get team*/
 	/*get movie json data*/
 	function getTeam() {
@@ -128,30 +142,23 @@ let api = {
 	}*/
 
 
-	function updateTeam(teamId, data) {
-		var deferred = q.defer();	
-		Team.findById(teamId, function(err, team){
-			if(err) {
-				deferred.reject(err)
-			} 
-			team.continent = data.continent,
-			team.flag = data.flag,
-			team.group = data.group,
-			team.ranking = data.ranking,
-			team.title = data.title,
+	function updateTeam(teamId, data) {	
+		return Team
+			.findById(teamId)
+			.then(team => {
+				for (var field in Team.schema.paths) {
+					if ((field !== '_id') && (field !== '__v')) {
 
-				team.save(function (err, data) {
-					if (err) {
-						deferred.reject(err)
-					} else {
-						console.log('database updated...');
-						console.log(data);
-						deferred.resolve(data)
+						if (data[field] !== undefined) {
+							team[field] = data[field];
+						}
 					}
-				});
-
-		})
-		return deferred.promise;
+				}
+				return team.save()
+			})
+			.catch(err => {
+				console.log(err);
+			})
 	}
 	// function updateTeam(teamId, data) {
 	// 	var deferred = q.defer();
@@ -198,9 +205,15 @@ let api = {
 		})
 		return deferred.promise;
 	};
+function deletePlayerById(id,player) {
+	console.log(id)
+	console.log(player)
+	return	Team
+		.findByIdAndUpdate(id, { $pull: { 'players': player}})
+		
+	}
 /* for create match teams */
 	function findTeamsByNames(n1,n2) {
-		console.log('team model find by names')
 		var status = {}
 		var deferred = q.defer()
 		Team.find({ title: { "$in": [n1, n2] }}, function (err, team) {
@@ -222,7 +235,7 @@ let api = {
 			if (err) {
 				deferred.reject(err)
 			} else {
-				deferred.resolve(team)
+				deferred.resolve(team._id)
 
 			}
 		})
@@ -248,6 +261,18 @@ let api = {
 		})
 		return deferred.promise;
 	}
+
+// function editPlayer(teamId, playerId) {
+// 	Team.findById(teamId )
+// 		.then(team=>{
+// 			if (team.players.indexOf(playerId) == -1){
+// 				team.players.push(playerId)
+// 				team.save()
+// 			}
+
+// 		})
+
+// }
 
 
 
