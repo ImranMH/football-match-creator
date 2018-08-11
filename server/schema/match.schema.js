@@ -5,14 +5,35 @@ const Schema = mongoose.Schema;
  
 const MatchSchema = new Schema({
     matchNo 	: Number,
-    teamOne: { type: Schema.Types.ObjectId, ref: "Team" },
-    teamTwo: { type: Schema.Types.ObjectId, ref: "Team" },
-    winner    : {type: Schema.Types.ObjectId, ref: "Team"},
-    looser    :{type: Schema.Types.ObjectId, ref: "Team"},
+    teamOne: { 
+        name: { type: Schema.Types.ObjectId, ref: "Team" },
+        score: Number,
+        conceded: Number,
+        point: Number
+    },
+    teamTwo: { 
+        name: { type: Schema.Types.ObjectId, ref: "Team" },
+        score: Number,
+        conceded: Number,
+        point: Number
+     },
+    winner    : {
+        name: { type: Schema.Types.ObjectId, ref: "Team" },
+        score: Number,
+        point: Number
+    },
+    looser    :{
+        name: { type: Schema.Types.ObjectId, ref: "Team" },
+        score: Number,
+        point: Number
+    },
     drow 		: {type:Boolean, default: false},
     winScore     : Number,
     loseScore     : Number,
-    scorer      : [{type: Schema.Types.ObjectId, ref: "PlayerModel"}],
+    scorer      : [{
+        player: {type: Schema.Types.ObjectId, ref: "PlayerModel"},
+        scoringTime: String
+                }],
     group      : String,
     finished : Boolean,
     playDate : Date,

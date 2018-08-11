@@ -7,8 +7,7 @@ import { Route } from 'react-router-dom';
 import MatchCreator from '../components/forms/MatchCreator'
 import MatchResultCont from '../components/pages/match/MatchResultCont'
 import MatchesShow from '../components/pages/match/MatchesShow'
- import { teams } from '../actions/team';
-import { sendGroup } from '../actions/team';
+import { showAllTeams, sendGroup} from '../actions/team';
 import { getAllMatches } from '../actions/match';
 // import axios from 'axios';
 
@@ -20,12 +19,15 @@ class Fixture extends Component {
    this.props.geTteam()
 
   }
+  editMatch = ()=>{
+    console.log('edit fixture');
+  }
   componentDidMount = () => {
     this.props.getAllMatches()
   };
   matchFixture = ()=> {
     if(this.props.matches) {
-      return <MatchesShow matchs ={this.props.matches} />
+      return <MatchesShow editMatch={this.editMatch} matchs ={this.props.matches} />
     } else {
       return <div> loading match ..... </div>
     }
@@ -44,7 +46,6 @@ class Fixture extends Component {
 
   
   render() {
-    console.log(this);
     return (
       <div className="row">
 
@@ -53,7 +54,7 @@ class Fixture extends Component {
         </div>
 
         <div className="col-md-5">
-          <Link to= {`${this.props.match.url}/addMatch`} className="btn btn-primary"> Create New Match </Link>
+          <Link to= {`${this.props.match.url}/addMatch`} className="btn btn-primary mr-2"> Create New Match </Link>
           <Link to= {`${this.props.match.url}/matchResult`} className="btn btn-primary"> Match Result </Link>
           <div className="fixture_area">
             
@@ -61,7 +62,7 @@ class Fixture extends Component {
               return <MatchCreator  team={this.props.teams} />
             } }/>
             <Route path={`${this.props.match.url}/matchResult`} render={() => {
-              return <MatchResultCont matches={this.props.matches} team={this.props.teams} />
+              return <MatchResultCont />
             }} />
           </div>
         </div>
@@ -75,10 +76,10 @@ const mapStateToProps = (state) => {
   return {
     teams: state.teams,
     groupTeam: state.groupTeam,
-    matches: state.matches
+    matches: state.matches.matches
   }
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ geTteam: teams, sendGroup, getAllMatches }, dispatch)
+  return bindActionCreators({ geTteam: showAllTeams, sendGroup, getAllMatches }, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps)(Fixture);

@@ -41,6 +41,10 @@ export default {
 
 			return axios.post('/api/match/newMatch', data)
 		},
+		updateMatch: (matchData) => {
+
+			return axios.put('/api/match/updateMatch', matchData)
+		},
 		allMatches: () => {
 			return axios.get('/api/match')
 		}

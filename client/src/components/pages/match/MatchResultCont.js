@@ -4,7 +4,7 @@ import SelectInput from './../../forms/SelectInput'
 import InputElement from './../../forms/InputElement'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllMatches } from '../../../actions/match';
+import { updateMatch} from '../../../actions/match';
 
 class MatchResultCont extends Component {
   static propTypes = {
@@ -12,7 +12,24 @@ class MatchResultCont extends Component {
   }
 
   state = {
-
+    match:{
+      group: 'A',
+      id: 0,
+      matchNo: 105,
+      playTime:'Aug 8 2018',
+      teamOne:{
+        title: 'Brazil',
+        score:0
+      },
+      teamTwoScore: 0,
+      teamTwo:{
+        title: 'Argentina', 
+        score:0 
+      },
+      teamOneScore: 0,
+      playDate: '2018-07-18',
+      playTime: '16:50'
+    }
   }
   componentDidMount =() =>{
 
@@ -38,28 +55,75 @@ class MatchResultCont extends Component {
   updateGroup = (e) => {
     this.setState({ ...this.state, [e.target.name]: e.target.value })
   }
+
+  updateScore = (e)=>{
+    this.setState({
+      match:{
+        ...this.state.match,
+        [e.target.name]: e.target.value
+      }
+    });
+  }
+
   clickFn = (e) => {
     e.preventDefault()
-    console.log(this.state)
-    this.props.createMatch(this.state)
+    /* update match dispatch action */
+     this.props.dispatchUpdateMatch(this.state)
   }
-  onChange =()=>{
-    console.log('onchange')
+  editData = (e) => {
+    e.preventDefault()
+    console.log('bdlclick')
   }
-  render() {
+  editable = (e) => {
+    console.log(e);
+  }
+  /* testless onChange function for onchange Event handler ...... */
+  onChange =(e)=>{
+    let matchId = e.target.value
+    this.props.matches.map(m=>{
+      
+      if (m._id === matchId) {
+        // this.match = match;
+        console.log(m)
+        this.setState({
+          match:{
+            id: m._id,
+            group: m.group,
+            teamOne:{
+              title: m.teamOne.name.title,
+              id: m.teamOne.name._id,
+            },
+            teamTwo:{
+              title: m.teamTwo.name.title,
+              id: m.teamTwo.name._id,
+            },
+             teamTwoScore: m.teamTwo.score || 0,
+             teamOneScore: m.teamOne.score || 0,
+            matchNo: m.matchNo,          
+            playDate: m.playDate,
+            playTime: m.playTime
+          }
+        })
+      }
+    })
+  }
 
+  render() {
+    console.log(this.state)
+    console.log(this.state)
+    /* match select option value data  */
     const mlist = []
     if (this.props.matches) {
       const match = this.props.matches
       
-       match.map(item => {
-         let i = {}
-         i.id = item._id,
-           i.match = item.matchNo,
+        match.map(item => {
+          let i = {}
+          i.id = item._id,
+            i.match = item.matchNo,
           mlist.push(i)
-       })
-       console.log(mlist)
+        })
     }
+    /* match select option value */
     const options = (data) => {
       if (data) {
         return data.map((opt, index) => {
@@ -67,8 +131,7 @@ class MatchResultCont extends Component {
         })
       }
     }
-    
-    const { grouped } = this.state
+    const { match } = this.state
     
     const data = [
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'
@@ -78,30 +141,44 @@ class MatchResultCont extends Component {
       <form>
         <div className="form-row">
           <label htmlFor="matchNo" >select Match </label>
-          <select className="form-group col-md-6"  name="matchNo" value="" onChange={this.onChange}>
+          <select className="custom-select mr-sm-2"  name="matchNo" value="" onChange={this.onChange}>
             <option defaultValue='' >Choose a match ... </option>
             {options(mlist)}
           </select>
         </div>
         <div className="form-row">
-          <SelectInput onChange={this.updateGroup} data={this.mlist} nil={'matchno'} label={"Match No"} dftvlu="Select Match" />
-          <SelectInput onChange={this.groupOnchange} data={data} nil={'group'} label={"Select a group"} dftvlu="Select Group" />
-          <SelectInput nil={'stadium'} onchange={this.updateGroup} label={"Select a stadium"} dftvlu="Select stadium" />
-        </div>
-        <h2>heeellloooo</h2>
-        <div className="form-row">
-          <SelectInput onChange={this.updateGroup} data={grouped} nil={'teamOne'} label={"Team One"} dftvlu="Select Team" />
-          <SelectInput onChange={this.updateGroup} data={grouped} nil={'teamTwo'} label={"Team Two"} dftvlu="Select Oponent" />
-
+          <InputElement value={match.matchNo} onChange={this.updateGroup} nil={'matchNo'} cnc="form-group col-md-6"  label={'Match No'}
+            placeholder={'Match No'} disabled={true} />
+          <InputElement value={match.group} onChange={this.updateGroup} nil={'group'} cnc="form-group col-md-6" label={'Group'}
+            placeholder={'Group'} disabled={true} />
         </div>
         <div className="form-row">
 
-          <InputElement onChange={this.updateGroup} nil={'playDate'} cnc="form-group col-md-6" type={'date'} label={'Playing Date'}
-            placeholder={'Playing Date'} />
-          <InputElement onChange={this.updateGroup} nil={'playTime'} cnc="form-group col-md-6" type={'time'} label={'Playing Time'}
-            placeholder={'Playing Time'} />
+          <InputElement value={match.playDate} onChange={this.updateGroup} nil={'playDate'} cnc="form-group col-md-6" label={'Playing Date'}
+            placeholder={'Playing Date'} disabled={true} />
+          <InputElement value={match.playTime} onChange={this.updateGroup} nil={'playTime'} cnc="form-group col-md-6" label={'Playing Time'}
+            placeholder={'Playing Time'} disabled={true} />
         </div>
-        <button onClick={this.clickFn} type="submit" className="btn btn-primary">Create Match</button>
+        <div className="form-row">
+          <InputElement value={match.teamOne.title} onChange={this.updateGroup} nil={'team'} cnc="form-group col-md-6"  label={'Team'}
+            placeholder={'Brazil'} disabled={true} />
+          <InputElement value={match.teamTwo.title} onChange={this.updateGroup} nil={'opponent'} cnc="form-group col-md-6" label={'Opponent'}
+            placeholder={'Argintina'} disabled={true} />
+        </div>
+        <div className="form-row">
+          <InputElement value={match.teamOneScore} type={'number'} onChange={this.updateScore} nil={'teamOneScore'} cnc="form-group col-md-6" label={'Team Goal'}
+            placeholder={''}  />
+          <InputElement value={match.teamTwoScore} type={'number'} onChange={this.updateScore} nil={'teamTwoScore'} cnc="form-group col-md-6" label={'Opponent Goal'}
+            placeholder={''}  />
+        </div>
+        <div className="form-row">
+          {/* <SelectInput onChange={this.updateGroup} data={data} nil={'teamOne'} label={"Team One"} dftvlu="Select Team" />
+          <SelectInput onChange={this.updateGroup} data={data} nil={'teamTwo'} label={"Team Two"} dftvlu="Select Oponent" /> */}
+
+        </div>
+
+        <button onClick={this.clickFn} type="submit" className="btn btn-primary">Update match</button>
+        <button onClick={this.editData}  className="btn btn-warning">Edit</button>
       </form>
     )
   }
@@ -111,10 +188,11 @@ class MatchResultCont extends Component {
 const mapStateToProps = (state) => {
   return {
     teams: state.teams,
+    matches: state.matches.matches,
     groupTeam: state.groupTeam
   }
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ findMatch: getAllMatches }, dispatch)
+  return bindActionCreators({ dispatchUpdateMatch: updateMatch }, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps)(MatchResultCont);

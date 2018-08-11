@@ -37,7 +37,7 @@ class MatchCreator extends Component {
   }
   clickFn =(e)=>{
     e.preventDefault()
-    console.log(this.state)
+
     this.props.createMatch(this.state)
   }
   render() {

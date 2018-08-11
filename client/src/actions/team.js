@@ -9,8 +9,8 @@ export const teamAdded = team => ({
 
 export const addTeams = data => (dispatch) => 
 	api.team.addTeam(data).then(team => dispatch(teamAdded(team)));
-
-export const teams = () => {
+/* show all teams */
+export const showAllTeams = () => {
 	var items = api.team.allTeam()
 	return (dispatch) => {
 	return	items.then(teams=>{

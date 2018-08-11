@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 //import { Route, Switch } from 'react-router-dom';
 import AddTeamTableContainer from'../components/pages/AddTeamTableContainer'
 import ShowTeam from'../components/pages/ShowTeam'
-import { teams } from '../actions/team';
+import { showAllTeams } from '../actions/team';
 // import axios from 'axios';
 
 
@@ -67,6 +67,6 @@ const mapStateToProps = (state) => {
   }
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({geTteam:teams}, dispatch)
+  return bindActionCreators({ geTteam: showAllTeams}, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps) (Homepage);

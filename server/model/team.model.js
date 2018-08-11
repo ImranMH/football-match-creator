@@ -17,6 +17,8 @@ let api = {
 	findTeamsByName,
 	findByIds,
 	deletePlayerById,
+	updateTeamOneMatchResult,
+	updateTeamTwoMatchResult,
 	addPlayer
 }
 
@@ -36,13 +38,12 @@ let api = {
 	}
 	/*  find match */
 	function findByIds(match) {
-
 		return Team
-			.find({ '_id': { $in: [match.teamOne, match.teamTwo] } })
+			.find({ '_id': { $in: [match.teamOne.name, match.teamTwo.name] } })
 			.then(function ( teams) {
 				teams.forEach(team => {
 					team.matches.push(match._id)
-					team.save()
+				 	team.save()
 				})
 			})
 	}
@@ -212,7 +213,7 @@ function deletePlayerById(id,player) {
 		.findByIdAndUpdate(id, { $pull: { 'players': player}})
 		
 	}
-/* for create match teams */
+/* for create match teams participent ........................*/
 	function findTeamsByNames(n1,n2) {
 		var status = {}
 		var deferred = q.defer()
@@ -255,6 +256,91 @@ function deletePlayerById(id,player) {
 					if (err) {
 						deferred.reject(err)
 					}
+					deferred.resolve(result)
+				})
+			}
+		})
+		return deferred.promise;
+	}
+
+	/* update team after a match play  ...............................*/
+function updateTeamOneMatchResult(matchDetail) {
+	console.log(" 1")
+	console.log(matchDetail)
+		var deferred = q.defer()
+	Team.findById(matchDetail.teamOne.name, function (err, team) {
+		console.log(team.matches)
+			if (err) {
+				deferred.reject(err)
+			} else if (team.matches.indexOf(matchDetail._id) === -1) {
+				console.log('here i am in team one');
+				team.opponents.push(matchDetail.teamTwo.name);
+				team.play = team.play + 1,
+				team.goalFor = team.goalFor + matchDetail.teamOne.score
+				team.goalAganist = team.goalAganist + matchDetail.teamOne.conceded
+				team.goalDiff = team.goalFor - team.goalAganist 
+				if (matchDetail.teamOne.point === 3){ 
+					team.win = team.win +1
+					team.point = team.point +3
+					team.resultSummer.push('w')
+				} else if (matchDetail.teamOne.point === 1){
+					team.draw = team.draw + 1
+					team.point = team.point + 1
+					team.resultSummer.push('d')
+				} else {
+					team.lost = team.lost + 1
+					team.point = team.point + 0
+					team.resultSummer.push('l')
+				}
+				team.matches.push(matchDetail._id);
+				team.save((err, result)=>{
+					if (err) {
+						deferred.reject(err)
+					}
+					console.log('tem one save function');
+					console.log(result);
+					deferred.resolve(result)
+				})
+			}
+		})
+		return deferred.promise;
+	}
+
+	/* update team after a match play  ...............................*/
+function updateTeamTwoMatchResult(matchDetail) {
+	console.log(" 2")
+		var deferred = q.defer()
+	Team.findById(matchDetail.teamTwo.name, function (err, team) {
+		console.log(team);
+			if (err) {
+				deferred.reject(err)
+			} else if (team.matches.indexOf(matchDetail._id) === -1) {
+				console.log('here i am in team two')
+				team.opponents.push(matchDetail.teamOne.name);
+				team.play = team.play + 1,
+				team.goalFor = team.goalFor + matchDetail.teamTwo.score
+				team.goalAganist =  team.goalAganist + matchDetail.teamTwo.conceded
+				team.goalDiff = team.goalFor - team.goalAganist 
+				if (matchDetail.teamTwo.point === 3){ 
+					team.win = team.win +1
+					team.point = team.point +3
+					team.resultSummer.push('w')
+				} else if (matchDetail.teamTwo.point === 1){
+					team.draw = team.draw + 1
+					team.point = team.point + 1
+					team.resultSummer.push('d')
+				} else {
+					team.lost = team.lost + 1
+					team.point = team.point + 0
+					team.resultSummer.push('l')
+				}
+				team.matches.push(matchDetail._id);
+				team.save((err, result)=>{
+					if (err) {
+						deferred.reject(err)
+					}
+					console.log('team two save function');
+					console.log(result);
 					deferred.resolve(result)
 				})
 			}

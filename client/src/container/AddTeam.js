@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addTeam, teams} from '../actions/team';
+import { addTeam, showAllTeams} from '../actions/team';
 import { addPlayer } from '../actions/player';
 import PropTypes from 'prop-types';
 
@@ -13,7 +13,7 @@ class AddTeam extends Component {
     addTeam: PropTypes.func.isRequired,
   }
   componentDidMount() {
-    this.props.teams()
+    this.props.showAllTeams()
   }
   AddTeam = data => {
     this.props.addTeam(data).then(res=>{
@@ -27,9 +27,6 @@ class AddTeam extends Component {
     })
   }
   render() {
-    if(this.props.team) {
-      console.log('hi')
-    }
     return (
       <div className="row">
         <div className=" col-md-6 country">
@@ -38,7 +35,7 @@ class AddTeam extends Component {
         </div>
         <div className=" col-md-6 country">
           <h2>Add new player</h2>
-          <AddPlayerForm addNewPlayer={this.addPlayer} team={this.props.team} btnText={'Add Player'} />
+          <AddPlayerForm addNewPlayer={this.addPlayer} team={this.props.teams} btnText={'Add Player'} />
         </div>      
       </div>
     );
@@ -48,10 +45,11 @@ class AddTeam extends Component {
 /* redux connect ................................ */
 const mapStateToProps = (state) => {
   return {
-    team: state.teams,
+    teams: state.teams,
+    team: state.team,
   }
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ addTeam, teams, addPlayer}, dispatch)
+  return bindActionCreators({ addTeam, showAllTeams, addPlayer}, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps)(AddTeam);

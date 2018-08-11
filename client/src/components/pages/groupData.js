@@ -7,18 +7,20 @@ const GroupData = (props) => {
         width:'50px',
         height: 'auto'
       }
+      console.log(team.lost)
       return (         
         <tr key={team._id} >
+         
           <td><img style={style} src={`flags/${team.flag}.png`} alt={team.title} /></td>
           <td><Link to = {`/team/${team._id}`}>{team.title} </Link> </td>
-          <td>3</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>5</td>
-          <td>4</td>
-          <td>1</td>
-          <td>4</td>
+          <td>{team.play}</td>
+          <td>{team.win}</td>
+          <td> {team.draw} </td>
+          <td>{team.lost}</td>
+          <td>{team.goalFor}</td>
+          <td>{team.goalAganist}</td>
+          <td>{team.goalDiff}</td>
+          <td>{team.point}</td>
           <td>-</td>
         </tr>
       )
@@ -32,13 +34,13 @@ const GroupData = (props) => {
           <table className="table table-striped " >
             <thead className="thead-light">
             <tr>
-                <th></th>
+                <th>-</th>
                 <th>Country</th>
                 <th>Played</th>
-                <th>Win</th>
-                <th>Loss</th>
-                <th>Drow</th>
-                <th>GF</th>
+                <th>Win </th>
+                <th>drow </th>
+                <th>Lost </th>
+                <th>GF </th>
                 <th>GA</th>
                 <th>GD</th>
                 <th>Point</th>
