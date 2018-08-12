@@ -60,23 +60,19 @@ class MatchResultCont extends Component {
     this.setState({
       match:{
         ...this.state.match,
-        [e.target.name]: e.target.value
+        [e.target.name]: parseInt(e.target.value) 
       }
     });
+    
   }
 
   clickFn = (e) => {
     e.preventDefault()
     /* update match dispatch action */
+    console.log(this.state);
      this.props.dispatchUpdateMatch(this.state)
   }
-  editData = (e) => {
-    e.preventDefault()
-    console.log('bdlclick')
-  }
-  editable = (e) => {
-    console.log(e);
-  }
+
   /* testless onChange function for onchange Event handler ...... */
   onChange =(e)=>{
     let matchId = e.target.value
@@ -84,18 +80,17 @@ class MatchResultCont extends Component {
       
       if (m._id === matchId) {
         // this.match = match;
-        console.log(m)
         this.setState({
           match:{
             id: m._id,
             group: m.group,
             teamOne:{
-              title: m.teamOne.name.title,
-              id: m.teamOne.name._id,
+              title: m.teamOne.name,
+              id: m.teamOne.id._id,  // this is the problem of publishng new match
             },
             teamTwo:{
-              title: m.teamTwo.name.title,
-              id: m.teamTwo.name._id,
+              title: m.teamTwo.name,
+              id: m.teamTwo.id._id,
             },
              teamTwoScore: m.teamTwo.score || 0,
              teamOneScore: m.teamOne.score || 0,
@@ -109,7 +104,6 @@ class MatchResultCont extends Component {
   }
 
   render() {
-    console.log(this.state)
     console.log(this.state)
     /* match select option value data  */
     const mlist = []

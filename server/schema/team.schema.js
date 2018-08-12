@@ -12,7 +12,7 @@ const TeamSchema = new Schema({
     flag      : String,
     appearence      : Number,
     players: [{ type: Schema.Types.ObjectId, ref: 'PlayerModel'}],
-    matches: [{ type: Schema.Types.ObjectId, ref: 'MatchModel' }],
+    matches: [{ type: Schema.Types.ObjectId, ref: 'Match' }],
     group      : {type:String, uppercase: true},
     standing      : Number,
     resultSummer      : [String],
@@ -24,8 +24,8 @@ const TeamSchema = new Schema({
     win      : { type: Number, default: 0 },
     draw      : { type: Number, default: 0 },
     lost      : { type: Number, default: 0 },
-    opponent      :{type: Schema.Types.ObjectId, ref: "TeamModel"},
-    opponents      :[{type: Schema.Types.ObjectId, ref: "TeamModel"}],
+    opponent      :{type: Schema.Types.ObjectId, ref: "Team"},
+    opponents      :[{type: Schema.Types.ObjectId, ref: "Team"}],
     status      : String,
 	});
 

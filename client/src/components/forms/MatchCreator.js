@@ -33,7 +33,9 @@ class MatchCreator extends Component {
   }
 
   updateGroup = (e) => {
-    this.setState({ ...this.state,[e.target.name]: e.target.value }) 
+    this.setState({ ...this.state,[e.target.name]: e.target.value },function () {
+      console.log(this.state);
+    }) 
   }
   clickFn =(e)=>{
     e.preventDefault()

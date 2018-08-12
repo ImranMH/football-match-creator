@@ -7,10 +7,8 @@ const GroupData = (props) => {
         width:'50px',
         height: 'auto'
       }
-      console.log(team.lost)
       return (         
-        <tr key={team._id} >
-         
+        <tr key={team._id} >         
           <td><img style={style} src={`flags/${team.flag}.png`} alt={team.title} /></td>
           <td><Link to = {`/team/${team._id}`}>{team.title} </Link> </td>
           <td>{team.play}</td>

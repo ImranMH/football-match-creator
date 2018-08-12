@@ -1,7 +1,7 @@
 import api from '../api';
 
 export const createMatch = (data) => {
-
+  console.log(data)
   const newMatch = api.match.addMatch( data)
 
   return (dispatch) => {
@@ -29,6 +29,7 @@ export const getAllMatches = () => {
   }
 }
 export const updateMatch = (matchData) => {
+  console.log('in action');
   console.log(matchData)
   const matches = api.match.updateMatch(matchData)
 

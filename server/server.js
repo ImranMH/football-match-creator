@@ -31,7 +31,9 @@ app.use(express.json())
 
 app.use( express.static(__dirname + '/../client/build'));
 
-
+process.on('warning', (warning) => {
+  console.log(warning.stack);
+});
 //..................end of middleware function ........................*/
 
 /* Route middleware setup ..............................................*/

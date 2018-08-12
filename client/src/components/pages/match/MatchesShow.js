@@ -26,14 +26,14 @@ const Match = ({  data})=> {
       </div>
       <div className="matchFixure">
         <h2 className="left">
-          <Link to={"/team/" + data.teamOne.name._id}>{data.teamOne.name.title} </Link> 
-          <span><img style={style} src={`/flags/${data.teamOne.name.flag}.png`} alt={data.teamOne.name.title} /></span> 
+          <Link to={"/team/" + data.teamOne.id._id}>{data.teamOne.name} </Link> 
+          <span><img style={style} src={`/flags/${data.teamOne.id.flag}.png`} alt={data.teamOne.name} /></span> 
           <span className="scoreLine">{data.teamOne.score}</span> 
         </h2> 
         <h2 className="right"> 
           <span className="scoreLine">{data.teamTwo.score}</span>
-          <span> <img style={style} src={`/flags/${data.teamTwo.name.flag}.png`} alt={data.teamTwo.name.title} /> </span>
-          <Link to={"/team/"+data.teamTwo.name._id}>{data.teamTwo.name.title} </Link>  
+          <span> <img style={style} src={`/flags/${data.teamTwo.id.flag}.png`} alt={data.teamTwo.name} /> </span>
+          <Link to={"/team/"+data.teamTwo.id._id}>{data.teamTwo.name} </Link>  
         </h2>
       </div>
 

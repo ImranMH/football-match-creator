@@ -6,24 +6,26 @@ const Schema = mongoose.Schema;
 const MatchSchema = new Schema({
     matchNo 	: Number,
     teamOne: { 
-        name: { type: Schema.Types.ObjectId, ref: "Team" },
+        id: { type: Schema.Types.ObjectId, ref: "Team" },
+        name: String,
         score: Number,
         conceded: Number,
         point: Number
     },
     teamTwo: { 
-        name: { type: Schema.Types.ObjectId, ref: "Team" },
+        id: { type: Schema.Types.ObjectId, ref: "Team" },
+        name: String,
         score: Number,
         conceded: Number,
         point: Number
      },
     winner    : {
-        name: { type: Schema.Types.ObjectId, ref: "Team" },
+        id: { type: Schema.Types.ObjectId, ref: "Team" },
         score: Number,
         point: Number
     },
     looser    :{
-        name: { type: Schema.Types.ObjectId, ref: "Team" },
+        id: { type: Schema.Types.ObjectId, ref: "Team" },
         score: Number,
         point: Number
     },

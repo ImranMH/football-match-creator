@@ -15,20 +15,23 @@ module.exports = (express) => {
 		Team.findTeamsByNames(teamOne, teamTwo).then(resp=>{
 			const match = {
 				matchNo: matchNo,
-				teamOne: resp[0]._id,
-				teamTwo: resp[1]._id,
+				teamOneId: resp[1]._id,
+				teamOneName: resp[1].title,
+				teamTwoId: resp[0]._id,
+				teamTwoName: resp[0].title,
 				group : group,
 				playDate: playDate,
 				playTime: playTime,
 				stadium: stadium
 			}
 			Match.createMatch(match).then(resData=>{
-				
-				Team.findByIds(resData).then(result=>{
-					Match.getMatchById(resData._id).then(result=>{
-						res.json(result)
-					})					
-				})				
+				Match.getMatchById(resData._id).then(result => {
+					res.json(result)
+				})
+				/* deactivate this function call */
+				// Team.findByIds(resData).then(result=>{
+										
+				// })				
 			})
 			
 		})
@@ -37,16 +40,18 @@ module.exports = (express) => {
 	function showAllMatch(req, res) {
 		
 		Match.getMatch().then(response=>{
-			console.log('it is showAllMatch method in controler')
 			res.json(response)
 		})
 	}
 	/* update match data after finishing game ...............................*/
-	async	function updateMatch(req, res) {
+	function updateMatch(req, res) {
 		const matchDetail = req.body.match
-		await Match.UpdateMatch(matchDetail).then(response => {
+		 Match.UpdateMatch(matchDetail).then(response => {
+
 			Team.updateTeamOneMatchResult(response).then(result=>{
+
 				Team.updateTeamTwoMatchResult(response).then(doc=>{
+
 					Match.getMatch().then(resData=>{
 						res.json(resData)
 					})
