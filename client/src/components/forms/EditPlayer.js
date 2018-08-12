@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import InputElement from './InputElement'
-import SelectInput from './SelectInput'
+// import SelectInput from './SelectInput'
 export default class EditPlayer extends Component {
   state= ({
     player: this.props.player

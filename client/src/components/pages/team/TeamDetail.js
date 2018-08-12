@@ -1,11 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-const DisplayTeamDetail = (props) => {
+import Player from '../player/Player'
+import MatchShow from '../match/MatchesShow'
+import ShowTeam from './ShowTeam'
+const TeamDetail = (props) => {
   const {team} = props
   return (
     <div className="displayTeamDetail">
       <div className="teamSummery fc ">
-        <div className="teamlit fc">
+        <ShowTeam teams ={team} />
+        {/* <div className="teamlit fc">
           <h2 className="top">Details Page</h2>
           <div className="teamflag">
             <img src={`/flags/${team.flag}.png`} alt={team.title} />
@@ -17,9 +21,11 @@ const DisplayTeamDetail = (props) => {
             <h3>Continent:<strong>{team.continent} </strong> </h3>
           </div>
           <div className="group"> <p>{team.group}</p> </div>
-        </div>
+        </div> */}
         <div className="teamInfo fl_left">
           <h2>team Info</h2>
+          <h2>Match schedule</h2>
+          <MatchShow matchs={team.matches} />
         </div>
         <div className="teamPlayer fl_right">
             <h2>Player list</h2>
@@ -36,19 +42,8 @@ const DisplayTeamDetail = (props) => {
     </div>
   )
 }
-export default DisplayTeamDetail;
+export default TeamDetail;
 
 
-const Player = ({ player }) => {
-
-  return (
-    <li className="playerList">
-      <h2>{player.name} </h2>
-      <div>Club: {player.club} </div>
-      <div>Age: {player.age} </div>
-      <div>Country: {player.country.title} </div>
-    </li>
-  )
-}
 
 

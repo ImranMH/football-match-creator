@@ -25,7 +25,6 @@ const Player = ({ player }) => {
   return (
     <li className="playerList">
       <Link to={"/player/"+player._id}><h2>{player.name} </h2> </Link>
-      
       <div>Club: {player.club} </div>
       <div>Age: {player.age} </div>
       {/* <div>Country: {player.country.title} </div> */}

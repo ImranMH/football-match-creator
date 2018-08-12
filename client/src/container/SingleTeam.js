@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { team } from '../actions/team';
-import  DisplayTeamDetail  from '../components/pages/TeamDetail';
+import  TeamDetail  from '../components/pages/team/TeamDetail';
 
 class SingleTeam extends Component {
   componentDidMount = () => {
@@ -13,7 +13,7 @@ class SingleTeam extends Component {
     const { singleTeam } = this.props;
 
     if (singleTeam) {
-      return <DisplayTeamDetail team={singleTeam} />
+      return <TeamDetail team={singleTeam} />
     } else {
       return <div> Loading ... </div>
     }

@@ -1,5 +1,5 @@
 import React from 'react'
-import GroupData from './groupData'
+import Fixture from './FixtureList'
 
 const TableHeading = (props) => {
   const style = {
@@ -16,7 +16,7 @@ export default ({teams}) => {
     const groupItem = teams.filter(team => {
       return team.group === group
     })
-    return <GroupData group={groupItem} name={group} />
+    return <Fixture group={groupItem} name={group} />
   }
 
   return (

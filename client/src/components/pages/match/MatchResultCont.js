@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import SelectInput from './../../forms/SelectInput'
+// import SelectInput from './../../forms/SelectInput'
 import InputElement from './../../forms/InputElement'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +16,6 @@ class MatchResultCont extends Component {
       group: 'A',
       id: 0,
       matchNo: 105,
-      playTime:'Aug 8 2018',
       teamOne:{
         title: 'Brazil',
         score:0
@@ -60,7 +59,7 @@ class MatchResultCont extends Component {
     this.setState({
       match:{
         ...this.state.match,
-        [e.target.name]: parseInt(e.target.value) 
+        [e.target.name]: parseInt(e.target.value, 10) 
       }
     });
     
@@ -69,7 +68,6 @@ class MatchResultCont extends Component {
   clickFn = (e) => {
     e.preventDefault()
     /* update match dispatch action */
-    console.log(this.state);
      this.props.dispatchUpdateMatch(this.state)
   }
 
@@ -80,7 +78,7 @@ class MatchResultCont extends Component {
       
       if (m._id === matchId) {
         // this.match = match;
-        this.setState({
+       this.setState({
           match:{
             id: m._id,
             group: m.group,
@@ -104,16 +102,16 @@ class MatchResultCont extends Component {
   }
 
   render() {
-    console.log(this.state)
+
     /* match select option value data  */
     const mlist = []
     if (this.props.matches) {
       const match = this.props.matches
       
-        match.map(item => {
+      match.map(item => {
           let i = {}
-          i.id = item._id,
-            i.match = item.matchNo,
+          i.id = item._id
+            i.match = item.matchNo
           mlist.push(i)
         })
     }
@@ -127,9 +125,9 @@ class MatchResultCont extends Component {
     }
     const { match } = this.state
     
-    const data = [
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'
-    ]
+    // const data = [
+    //   'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'
+    // ]
 
     return (
       <form>

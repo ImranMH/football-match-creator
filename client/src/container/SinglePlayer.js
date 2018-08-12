@@ -1,8 +1,8 @@
  import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { editedPlayer, deleteById } from '../actions/player';
 
  import { getPlayerById } from "../actions/player";

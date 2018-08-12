@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-const GroupData = (props) => {
+const Fixture = (props) => {
   const renderGroup = () => {
     return props.group.map(team => {
       const style = {
@@ -54,4 +54,4 @@ const GroupData = (props) => {
     </ul>
   )
 }
-export default GroupData
+export default Fixture

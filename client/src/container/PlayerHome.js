@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { allPayer } from '../actions/player';
-import PlayerList from '../components/pages/PlayerList';
+import PlayerList from '../components/pages/player/PlayerList';
 console.log('player home');
 class PlayerHome extends Component {
   componentDidMount = () => {

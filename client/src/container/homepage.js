@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 //import { Route, Switch } from 'react-router-dom';
-import AddTeamTableContainer from'../components/pages/AddTeamTableContainer'
-import ShowTeam from'../components/pages/ShowTeam'
+import AddTeamTableContainer from'../components/pages/team/AddTeamTableContainer'
+import ShowTeam from'../components/pages/team/ShowTeam'
 import { showAllTeams } from '../actions/team';
 // import axios from 'axios';
 
