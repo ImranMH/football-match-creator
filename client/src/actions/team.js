@@ -28,6 +28,7 @@ export const team = (id) => {
 	return (dispatch) => {
 		
 		return items.then(team => {
+			console.log(team)
 			dispatch({
 				type: "SHOW_TEAM_BYID",
 				payload: team.data

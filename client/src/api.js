@@ -47,6 +47,19 @@ export default {
 		},
 		allMatches: () => {
 			return axios.get('/api/match')
+		},
+		filteredMatch: () => {
+			return axios.get('/api/match/filtered')
+		},
+		deleteMatchById: (id) => {
+			return axios.delete('/api/match/'+id, {
+				params: {
+					id: id
+				}
+			})
+		},
+		editMatchById: (match) => {
+			return axios.put('/api/match/' + match.id, match )
 		}
 	},
 	player:{

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import InputElement from './../../forms/InputElement'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateMatch} from '../../../actions/match';
+import { updateMatch, deleteMatchById, editMatchById, filteredMatch} from '../../../actions/match';
 
 class MatchResultCont extends Component {
   static propTypes = {
@@ -28,10 +28,11 @@ class MatchResultCont extends Component {
       teamOneScore: 0,
       playDate: '2018-07-18',
       playTime: '16:50'
-    }
+    },
+    inputDisable: true
   }
   componentDidMount =() =>{
-
+    this.props.filteredMatch()
   }
   groupOnchange = (e) => {
     const groupKey = e.target.value;
@@ -65,12 +66,22 @@ class MatchResultCont extends Component {
     
   }
 
-  clickFn = (e) => {
+  updateResult = (e) => {
     e.preventDefault()
     /* update match dispatch action */
      this.props.dispatchUpdateMatch(this.state)
   }
-
+  deleteMatch=(e)=>{
+    e.preventDefault()
+    this.props.deleteMatchById(this.state.match.id)
+  }
+  editMatch=(e)=>{
+    e.preventDefault()
+    this.setState({
+      inputDisable: false
+    })
+    this.props.editMatchById(this.state.match)
+  }
   /* testless onChange function for onchange Event handler ...... */
   onChange =(e)=>{
     let matchId = e.target.value
@@ -140,16 +151,16 @@ class MatchResultCont extends Component {
         </div>
         <div className="form-row">
           <InputElement value={match.matchNo} onChange={this.updateGroup} nil={'matchNo'} cnc="form-group col-md-6"  label={'Match No'}
-            placeholder={'Match No'} disabled={true} />
+            placeholder={'Match No'} disabled={this.state.inputDisable} />
           <InputElement value={match.group} onChange={this.updateGroup} nil={'group'} cnc="form-group col-md-6" label={'Group'}
             placeholder={'Group'} disabled={true} />
         </div>
         <div className="form-row">
 
           <InputElement value={match.playDate} onChange={this.updateGroup} nil={'playDate'} cnc="form-group col-md-6" label={'Playing Date'}
-            placeholder={'Playing Date'} disabled={true} />
+            placeholder={'Playing Date'} disabled={this.state.inputDisable} />
           <InputElement value={match.playTime} onChange={this.updateGroup} nil={'playTime'} cnc="form-group col-md-6" label={'Playing Time'}
-            placeholder={'Playing Time'} disabled={true} />
+            placeholder={'Playing Time'} disabled={this.state.inputDisable} />
         </div>
         <div className="form-row">
           <InputElement value={match.teamOne.title} onChange={this.updateGroup} nil={'team'} cnc="form-group col-md-6"  label={'Team'}
@@ -169,8 +180,9 @@ class MatchResultCont extends Component {
 
         </div>
 
-        <button onClick={this.clickFn} type="submit" className="btn btn-primary">Update match</button>
-        <button onClick={this.editData}  className="btn btn-warning">Edit</button>
+        <button onClick={this.updateResult} type="submit" className="btn btn-primary">Update Result</button>
+        {/* <button onClick={this.editMatch}  className="btn btn-warning">Edit</button> */}
+        <button onClick={this.deleteMatch}  className="btn btn-danger">Delete</button>
       </form>
     )
   }
@@ -180,11 +192,12 @@ class MatchResultCont extends Component {
 const mapStateToProps = (state) => {
   return {
     teams: state.teams,
-    matches: state.matches.matches,
+    // matches: state.matches.matches,
+    matches: state.matches.filteredMatch,
     groupTeam: state.groupTeam
   }
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ dispatchUpdateMatch: updateMatch }, dispatch)
+  return bindActionCreators({ dispatchUpdateMatch: updateMatch, filteredMatch, editMatchById, deleteMatchById }, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps)(MatchResultCont);

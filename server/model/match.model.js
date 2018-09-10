@@ -11,8 +11,11 @@ let api = {
 	createMatch,
 	updateTeam,
 	getMatch,
+	getUpCommingMatch,
 	getMatchById,
 	UpdateMatch,
+	deleteMatchById,
+	EditMatchById,
 	getWeblinkWithSkip
 }
 module.exports = api
@@ -40,19 +43,55 @@ module.exports = api
 		// var deferred = q.defer();
 		return Match
 			.find()
+			.sort('playDate')
 			.populate('teamOne.id')
 			.populate('teamTwo.id')
 			.exec()
 	}
+/* get all match like fixture ......................................... */
+function getUpCommingMatch(match) {
+	// var deferred = q.defer();
+	return Match
+		.find()
+		.where('finished').equals(false)
+		.populate('teamOne.id')
+		.populate('teamTwo.id')
+		.exec()
+}
 /* get  match by id  ......................................... */
 function getMatchById(Id) {
 	// var deferred = q.defer();
+	console.log(Id)
 	return Match
 		.findById(Id)
 		.populate('teamOne.id')
 		.populate('teamTwo.id')
 		.exec()
 		
+}
+function deleteMatchById(Id) {
+	// delete match before update result
+	return Match
+		.findByIdAndRemove(Id)		
+}
+function EditMatchById(data) {
+	// edit match before update result
+	return Match
+		.findById(data.id)
+		.then(match => {
+			for (var field in Team.schema.paths) {
+				if ((field !== '_id') && (field !== '__v')) {
+
+					if (data[field] !== undefined) {
+						match[field] = data[field];
+					}
+				}
+			}
+			return match.save()
+		})
+		.catch(err => {
+			console.log(err);
+		})		
 }
 	/* create a new match schedule  ................................*/
 	function createMatch(data) {
@@ -61,11 +100,13 @@ function getMatchById(Id) {
 			matchNo: data.matchNo,
 			teamOne:{
 				name: data.teamOneName,
-				id: data.teamOneId
+				id: data.teamOneId,
+				flag: data.teamOneFlag				
 			} ,
 			teamTwo: {
 				id: data.teamTwoId,
-				name: data.teamTwoName
+				name: data.teamTwoName,
+				flag: data.teamTwoFlag
 			},
 			group: data.group,
 			playDate: data.playDate,

@@ -1,7 +1,10 @@
+/* 
+  Single Teampage main layout
+*/
 import React from 'react'
 import { Link } from 'react-router-dom';
 import Player from '../player/Player'
-import MatchShow from '../match/MatchesShow'
+// import MatchShow from '../match/MatchesShow'
 import ShowTeam from './ShowTeam'
 const TeamDetail = (props) => {
   const {team} = props
@@ -44,6 +47,40 @@ const TeamDetail = (props) => {
 }
 export default TeamDetail;
 
+const MatchShow =  ({ matchs }) => {
+  const matches = matchs.map(match => {
+    console.log(match)
+    return <Match key={match._id} data={match} />
+  })
+  return (
+    <div>
+      {matches}
+    </div>
+  )
+}
+
+const Match = ({data}) => {
+  const style = {
+    width: '45px',
+    height: '30px',
+  };
+  return (
+    <div>
+      <div className="matchFixure">
+        <h2 className="left">
+          <Link to={"/team/" + data.teamOne_id}>{data.teamOne.name} </Link>
+          <span><img style={style} src={`/flags/${data.teamOne.flag}.png`} alt={data.teamOne.name} /></span>
+          <span className="scoreLine">{data.teamOne.score}</span>
+        </h2>
+        <h2 className="right">
+          <span className="scoreLine">{data.teamTwo.score}</span>
+          <span> <img style={style} src={`/flags/${data.teamTwo.flag}.png`} alt={data.teamTwo.name} /> </span>
+          <Link to={"/team/" + data.teamTwo._id}>{data.teamTwo.name} </Link>
+        </h2>
+      </div>
+    </div>
+  )
+}
 
 
 

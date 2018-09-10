@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 
 export default ({ matchs}) => {
   const matches = matchs.map(match=>{
-
     return <Match key={match._id}  data={match} />
   })
   return (

@@ -27,7 +27,6 @@ let api = {
 	function getTeamById(team) {
 		var deferred = q.defer();
 		Team.findById(team).populate('players').populate('matches').exec(function (err, user){
-		
 				if (err) {
 					deferred.reject(err)
 				}

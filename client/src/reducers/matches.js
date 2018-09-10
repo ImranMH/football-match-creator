@@ -1,5 +1,6 @@
 const initialState = {
   matches : [],
+  filteredMatch:[],
   match: {}
 }
 const matches = function (state = initialState, action = {}) {
@@ -12,6 +13,18 @@ const matches = function (state = initialState, action = {}) {
     }
     case 'UPDATE_MATCH': {
       return { ...state, matches: action.payload }
+    }
+    case 'DELETE_MATCH': {
+
+      return { ...state, matches: action.payload  }
+    }
+    case 'EDIT_MATCH': {
+
+      return { ...state, matches: action.payload  }
+    }
+    case 'SHOW_ALL_FILTERED_MATCH': {
+
+      return { ...state, filteredMatch: action.payload  }
     }
     default: return state;
   }

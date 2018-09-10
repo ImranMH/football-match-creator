@@ -8,6 +8,11 @@ class SingleTeam extends Component {
   componentDidMount = () => {
     let params = this.props.match.params;
     this.props.getTeam(params)
+    fetch('/api/match/filtered').then(match=>{
+     return match.json()
+    }).then(data=>{
+      console.log(data)
+    })
   }
   renderDetail() {
     const { singleTeam } = this.props;

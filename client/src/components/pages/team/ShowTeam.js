@@ -1,3 +1,6 @@
+/* 
+	Team Home upper block
+*/
 import React, { Component } from 'react';
 import  { Link } from 'react-router-dom';
 //import axios from 'axios';
@@ -24,7 +27,7 @@ export default class ShowTeam extends Component {
 					<h3>Continent:<strong>{teams.continent} </strong> </h3>
 				</div>
 				<div className="group"> <p>{teams.group}</p> </div>
-				<div><Link to ={`team/${teams._id}/edit`}> Edit </Link></div>
+				<div><Link to ={`/team/${teams._id}/edit`}> Edit </Link></div>
 			</li>
 	  );
 	}

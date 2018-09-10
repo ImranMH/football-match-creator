@@ -28,6 +28,20 @@ export const getAllMatches = () => {
     })
   }
 }
+export const filteredMatch = () => {
+
+  const matches = api.match.filteredMatch()
+
+  return (dispatch) => {
+    return matches.then(matches => {
+      console.log(matches)
+      dispatch({
+        type: "SHOW_ALL_FILTERED_MATCH",
+        payload: matches.data
+      })
+    })
+  }
+}
 export const updateMatch = (matchData) => {
   console.log('in action');
   console.log(matchData)
@@ -38,6 +52,33 @@ export const updateMatch = (matchData) => {
       console.log(matches.data)
       dispatch({
         type: "UPDATE_MATCH",
+        payload: matches.data
+      })
+    })
+  }
+}
+export const deleteMatchById = (id) => {
+
+  const matches = api.match.deleteMatchById(id)
+  return (dispatch) => {
+    return matches.then(matches => {
+      dispatch({
+        type: "DELETE_MATCH",
+        payload: matches.data
+      })
+    })
+  }
+}
+export const editMatchById = (match) => {
+  console.log('in action');
+  console.log(match)
+  const matches = api.match.editMatchById(match)
+
+  return (dispatch) => {
+    return matches.then(matches => {
+      console.log(matches.data)
+      dispatch({
+        type: "EDIT_MATCH",
         payload: matches.data
       })
     })

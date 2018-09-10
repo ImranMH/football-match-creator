@@ -8,6 +8,7 @@ const MatchSchema = new Schema({
     teamOne: { 
         id: { type: Schema.Types.ObjectId, ref: "Team" },
         name: String,
+        flag: String,
         score: Number,
         conceded: Number,
         point: Number
@@ -16,6 +17,7 @@ const MatchSchema = new Schema({
         id: { type: Schema.Types.ObjectId, ref: "Team" },
         name: String,
         score: Number,
+        flag: String,
         conceded: Number,
         point: Number
      },
@@ -37,7 +39,7 @@ const MatchSchema = new Schema({
         scoringTime: String
                 }],
     group      : String,
-    finished : Boolean,
+    finished : {type:Boolean, default: false},
     playDate : Date,
     playTime : String,
     stadium : String
