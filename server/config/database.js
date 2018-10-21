@@ -3,7 +3,8 @@ var dbPro = 'football';
 var dbUser = 'footballer';
 var dbPassword = 'fifa2018';
 const development = 'mongodb://127.0.0.1:27017/'+dbDev;
-const production = 'mongodb://'+dbUser+':'+dbPassword+'@ds139817.mlab.com:39817/'+dbPro;
+const production = 'mongodb://'+dbUser+':'+dbPassword+'@ds137643.mlab.com:37643/'+dbPro;
+// mongodb://<dbuser>:<dbpassword>@ds137643.mlab.com:37643/football
 // const options = {
 //   server: { poolSize: 1 }
 // }
@@ -23,13 +24,13 @@ module.exports = (mongoose) => {
 
 	var connectingString = development
 
-  if (process.env.OPENSHIFT_MONGODB_DB_URL) {
-       connectingString = process.env.OPENSHIFT_MONGODB_DB_URL
-  }
+  // if (process.env.OPENSHIFT_MONGODB_DB_URL) {
+  //      connectingString = process.env.OPENSHIFT_MONGODB_DB_URL
+  // }
    if (process.env.port) {
        connectingString = production
   }
-  mongoose.connect(connectingString, options);
+  mongoose.connect(connectingString);
  // mongoose.connect(connectingString, configDB.options);
   var db = mongoose.connection;
   // mongoose.set("debug", true)
