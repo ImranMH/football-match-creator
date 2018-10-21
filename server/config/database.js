@@ -22,14 +22,14 @@ const options = {
 module.exports = (mongoose) => {
 	
 
-	var connectingString = development
+	var connectingString = 'mongodb://'+dbUser+':'+dbPassword+'@ds137643.mlab.com:37643/'+dbPro;
 
   // if (process.env.OPENSHIFT_MONGODB_DB_URL) {
   //      connectingString = process.env.OPENSHIFT_MONGODB_DB_URL
   // }
-   if (process.env.port) {
-       connectingString = production
-  }
+  //  if (process.env.port) {
+  //      connectingString = production
+  // }
   mongoose.connect(connectingString);
  // mongoose.connect(connectingString, configDB.options);
   var db = mongoose.connection;
