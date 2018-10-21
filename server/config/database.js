@@ -28,8 +28,7 @@ module.exports = (mongoose) => {
   //      connectingString = process.env.OPENSHIFT_MONGODB_DB_URL
   // }
    if (process.env.DATABASE_URL) {
-     console.log('yes')
-       connectingString = DATABASE_URL
+       connectingString = process.env.DATABASE_URL
   }
   mongoose.connect(connectingString, options);
  // mongoose.connect(connectingString, configDB.options);
