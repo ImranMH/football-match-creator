@@ -1,7 +1,7 @@
 var dbDev = 'fifa2018';
-var dbPro = 'fifa2018';
-var dbUser = 'movieGossip';
-var dbPassword = 'imran2020';
+var dbPro = 'football';
+var dbUser = 'footballer';
+var dbPassword = 'fifa2018';
 const development = 'mongodb://127.0.0.1:27017/'+dbDev;
 const production = 'mongodb://'+dbUser+':'+dbPassword+'@ds139817.mlab.com:39817/'+dbPro;
 // const options = {

@@ -41,7 +41,7 @@ button{
   width: 50%;
 }
 .teamlit_con{
-  margin-top: 40px;
+  /* margin-top: 40px; */
 }
 .teamlit{
   border: 1px solid #ccc;
@@ -99,7 +99,14 @@ button{
   color: #fff;
 }
 
-
+.navbar a{
+  font-size: 20px;
+  color:#fff;
+  letter-spacing: 1px;
+}
+.navbar{
+  margin-bottom: 40px;
+}
 .fc{
   overflow: hidden;
   position: relative;
