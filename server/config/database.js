@@ -4,7 +4,7 @@ var dbUser = 'footballer';
 var dbPassword = 'fifa2018';
 const development = 'mongodb://127.0.0.1:27017/'+dbDev;
 const production = 'mongodb://'+dbUser+':'+dbPassword+'@ds137643.mlab.com:37643/'+dbPro;
-// mongodb://<dbuser>:<dbpassword>@ds137643.mlab.com:37643/football
+// mongodb://footballer:fifa2018@ds137643.mlab.com:37643/football
 // const options = {
 //   server: { poolSize: 1 }
 // }
@@ -27,8 +27,8 @@ module.exports = (mongoose) => {
   // if (process.env.OPENSHIFT_MONGODB_DB_URL) {
   //      connectingString = process.env.OPENSHIFT_MONGODB_DB_URL
   // }
-   if (process.env) {
-       connectingString = production
+   if (process.env.DATABASE_URL) {
+       connectingString = DATABASE_URL
   }
   mongoose.connect(connectingString);
  // mongoose.connect(connectingString, configDB.options);
