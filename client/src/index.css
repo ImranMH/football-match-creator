@@ -40,24 +40,34 @@ button{
   float: right;
   width: 50%;
 }
+.teamlit_con{
+  margin-top: 40px;
+}
 .teamlit{
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    text-transform: capitalize;
-    padding-left: 20px;
-    width: 440px;
-    overflow: hidden;
-    padding: 20px 5px;
-    position: relative;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  /* padding-left: 20px; */
+  display: flex;
+  overflow: hidden;
+  padding: 10px 5px;
+  position: relative;
+  background: #e6edf3;
+}
+.team_title{
+  margin-bottom: 40px;
+  padding: 5px 10px;
+  background: #e6edf3;
 }
 .teamflag{
   float: left;
   width: 100px;
-  border: 1px solid #ccc
+  /* border: 1px solid #ccc */
 }
 .teaminfo{
   float: right;
-  width: 310px;
+  /* width: 310px; */
+  margin-left: 6px;
 }
 .teamlit h3{
   font-size: 12px;

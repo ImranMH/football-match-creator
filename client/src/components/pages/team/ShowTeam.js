@@ -19,7 +19,7 @@ export default class ShowTeam extends Component {
 			<li className="teamlit" key={teams.ranking}>
 				<div className="teamflag">
 					<img style={style} src={`/flags/${teams.flag}.png`} alt={teams.title} />
-					
+					<div><Link to ={`/team/${teams._id}/edit`}> Edit </Link></div>
 				</div>
 				<div className="teaminfo">
 					<h2 className="teaminfo_heading" > <Link to={`team/${teams._id}`}> {teams.title} </Link></h2>
@@ -27,7 +27,7 @@ export default class ShowTeam extends Component {
 					<h3>Continent:<strong>{teams.continent} </strong> </h3>
 				</div>
 				<div className="group"> <p>{teams.group}</p> </div>
-				<div><Link to ={`/team/${teams._id}/edit`}> Edit </Link></div>
+				
 			</li>
 	  );
 	}

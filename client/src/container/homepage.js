@@ -51,7 +51,7 @@ class Homepage extends Component {
         </div>
        
         <div className="col-md-4">
-          <ul>
+          <ul className="teamlit_con">
             {this.renderTeam()}
           </ul>          
         </div>

@@ -27,8 +27,8 @@ const TeamDetail = (props) => {
           <div className="group"> <p>{team.group}</p> </div>
         </div> */}
         <div className="teamInfo fl_left">
-          <h2>team Info</h2>
-          <h2>Match schedule</h2>
+          
+          <h2 className="team_title">Recent matches</h2>
           <MatchShow matchs={team.matches} />
         </div>
         <div className="teamPlayer fl_right">
