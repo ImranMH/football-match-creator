@@ -12,6 +12,7 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "node server/server.js",
     "client": "node start-client.js",
+    "heroku-prebuild": "cd client && npm install && npm run build",
     "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
