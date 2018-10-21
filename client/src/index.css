@@ -192,3 +192,11 @@ text-transform: capitalize;
 .playerList div {
   color: #ccc
 }
+
+.player-option{
+  display: flex;
+  justify-content: start;
+}
+.player-option :first-child{
+  margin-right: 10px;
+}

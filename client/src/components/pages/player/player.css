@@ -46,3 +46,32 @@
   position: relative;
   overflow: hidden;
 }
+
+.player_detail{
+  background: #f8f9fa;
+    width: 700px;
+    margin-left: -93px;
+    padding: 30px;
+    display: flex;
+    color: #1d2124;
+    text-transform: capitalize;
+}
+.player_detail .jarsey{
+  font-style: italic;
+}
+.player_detail .jarsey span{
+  background: red;
+  color: #fff;
+  padding: 5px;
+  font-weight: 800;
+}
+.info h2{
+  background: #1d2124;
+  color: #fff;
+  padding: 3px 5px;
+  margin-bottom: 10px;
+}
+.info div{
+  padding: 3px;
+  color: #343a40;
+}

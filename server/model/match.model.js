@@ -53,7 +53,7 @@ function getUpCommingMatch(match) {
 	// var deferred = q.defer();
 	return Match
 		.find()
-		.where('finished').equals(false)
+		// .where('finished').equals(false)
 		.populate('teamOne.id')
 		.populate('teamTwo.id')
 		.exec()

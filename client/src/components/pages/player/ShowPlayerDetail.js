@@ -4,13 +4,20 @@ import PropTypes from 'prop-types'
 const ShowPlayerDetail = ({player}) => {
   
   return (
-    <div>
-
-      <h2>jarsey No: {player.jersey}</h2>
-      <h2>name: {player.name}</h2>
-      <div>club:{player.club} </div>
-      {/* <div>country:{player.country.title} </div> */}
-      <div>age:{player.age} </div>
+    <div className="player_detail">
+      <div className="pic">
+        <img src={`/players/${player.image}.jpg`} />
+      </div>
+      <div className="info">
+        <h2> {player.name}</h2>
+        <div>{player.position} </div>
+        <div className="jarsey">jarsey No: <span>{player.jersey}</span> </div>
+        <div>club:{player.club}, {player.clubOrigin} </div>
+        {/* <div>club:{player.country.continent}</div> */}
+        
+        <div>age:{player.age} </div>
+      </div>
+      
     </div>
   )
 }

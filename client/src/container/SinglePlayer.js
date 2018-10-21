@@ -46,29 +46,26 @@ export class SinglePlayer extends Component {
     return (
       <div className="container">
         <div className="row">
-          
-          <div className="col-md-6">
-            <h2>single player page</h2>
-            
-            <ShowPlayerDetail player= {player} />
-          </div>
-          <div className="col-md-6">
-            <DeletePlayer deleteText={deteleText} handleDelete={this.handleDelete} />
-            <ToggleRender >
-              {
-                ({ on, toggleState})=>( 
-                  <div>
-                    <button className="btn btn-warning" onClick={toggleState} >
-                      Edit player
-                    </button>
-                    { on && this.player() }
-                    { !on && <ShowPlayerDetail player={player} />}
-                   
-                  </div>
-                 ) 
+          <div className="col-md-12">
+            <div className="player-option">
+              <DeletePlayer deleteText={deteleText} handleDelete={this.handleDelete} />
+              <ToggleRender >
+                {
+                  ({ on, toggleState})=>( 
+                    <div>
+                      <button className="btn btn-warning" onClick={toggleState} >
+                        Edit player
+                      </button>
+                      { on && this.player() }
+                      { !on && <ShowPlayerDetail player={player} />}
+                    
+                    </div>
+                  ) 
 
-              }
-            </ToggleRender >
+                }
+              </ToggleRender >
+            </div>
+           
           </div>
         </div>
 
