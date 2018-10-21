@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "fifa 2018 football world cup win predictor application",
   "main": "server.js",
+  "engine": {
+    "node": "10.*.*",
+    "npm": "6.11.*"
+  },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "node server/server.js",
