@@ -4,6 +4,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import Player from '../player/Player'
+import PlayerList from '../player/PlayerList'
 // import MatchShow from '../match/MatchesShow'
 import ShowTeam from './ShowTeam'
 const TeamDetail = (props) => {
@@ -31,14 +32,15 @@ const TeamDetail = (props) => {
           <MatchShow matchs={team.matches} />
         </div>
         <div className="teamPlayer fl_right">
-            <h2>Player list</h2>
-            <ul>
+            {/* <h2>Player list</h2> */}
+            {/* <ul>
               {
               team.players.map(player=>{
                 return <Player key={player._id} player={player}  />
               })
               }
-            </ul>
+            </ul> */}
+            <PlayerList players={team.players} />
         </div>
       </div>
 
