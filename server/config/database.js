@@ -13,7 +13,7 @@ const options = {
   useNewUrlParser: true ,
   autoIndex: false, // Don't build indexes
   reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
-  reconnectInterval: 500, // Reconnect every 500ms
+  // reconnectInterval: 500, // Reconnect every 500ms
   poolSize: 10, // Maintain up to 10 socket connections
   // If not connected, return errors immediately rather than waiting for reconnect
   bufferMaxEntries: 0
@@ -28,9 +28,10 @@ module.exports = (mongoose) => {
   //      connectingString = process.env.OPENSHIFT_MONGODB_DB_URL
   // }
    if (process.env.DATABASE_URL) {
+     console.log('yes')
        connectingString = DATABASE_URL
   }
-  mongoose.connect(connectingString);
+  mongoose.connect(connectingString, options);
  // mongoose.connect(connectingString, configDB.options);
   var db = mongoose.connection;
   // mongoose.set("debug", true)
